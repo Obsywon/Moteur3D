@@ -15,9 +15,7 @@ std::ostream& operator <<(std::ostream &s, const Face& face){
 
 
 void Face::draw_triangle(TGAImage &img, TGAColor color){
-    for (Vertex v: _vertices){
-        for (Vertex end: _vertices){
-            if (v == end) v.draw_line(end, img, color);
-        }   
-    }
+    _vertices.at(0).draw_line(_vertices.at(1), img, color);
+    _vertices.at(0).draw_line(_vertices.at(2), img, color);
+    _vertices.at(2).draw_line(_vertices.at(1), img, color);
 }
