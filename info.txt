@@ -1,0 +1,27 @@
+Coordonées barycentriques 
+x = X0. (1 - t) + xi. t
+y = y0 . (1-t) + yi. t 
+
+autre manière de voir :
+x = x0 +(x1 -x0) * t
+y = y0 + (y1 - y0) * t 
+
+p(t) = p0 + t * vecteur d
+
+t + (1 - t) = 1
+si t = 0: point 0, t = 1; point final;
+entre les deux; n'importe quel point entre p0 et pf -> Boucler de 0 à 1 permet de remplir un trait
+(x0 + x1) / 2 : point au milieu du segment entre x1 et X0
+x0 + 2 - x1 => En dehors du segment mais sur la même droite.
+
+
+
+Modèles normées:
+(x, y, z) appartiennent à [-1, +1]^3 
+Nécessité de parser les fichiers obj et récupérer uniquement les sommets (lignes commencant par 'v', pas 'vn' ou 'vt')
+1) commencer par obtenir un nuage de points 2D (une coordonnée parmi x,y ou z)
+(comparer en utilisant un visualiseur de fichier obj)
+(ne pas oublier de scaler sur l'écran : (x * w/ 2) + (w / 2) 
+
+Lignes commençant par f : sur une ligne, chaque triplet: prendre la première valeur de chaque triplet.
+décrémenter
