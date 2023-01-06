@@ -24,4 +24,4 @@ Nécessité de parser les fichiers obj et récupérer uniquement les sommets (li
 (ne pas oublier de scaler sur l'écran : (x * w/ 2) + (w / 2) 
 
 Lignes commençant par f : sur une ligne, chaque triplet: prendre la première valeur de chaque triplet.
-décrémenter
+décrémenter de 1 (dans liste de noeuds) pour retrouver les triangles

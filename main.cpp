@@ -1,12 +1,14 @@
-#include "tgaimage.h"
 #include "Parser.h"
 
 
 const TGAColor white = TGAColor(255, 255, 255, 255);
 const TGAColor red   = TGAColor(255, 0,   0,   255);
 
-constexpr int HEIGHT = 100;
-constexpr int WIDTH = 100;
+constexpr int HEIGHT = 500;
+constexpr int WIDTH = 500;
+
+
+
 
 void line (int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color){
 	bool steep = false; 
@@ -31,16 +33,21 @@ void line (int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color){
 }
 
 
-
-
-
-
 int main(int argc, char** argv) {
     Parser parser("./obj/african_head/african_head.obj");
-    std::vector<Node> nodes = parser.buildNodes(WIDTH, HEIGHT);
+    std::vector<Vertex> vertices = parser.buildVertexes(WIDTH, HEIGHT);
 
-	TGAImage image(100, 100, TGAImage::RGB);
-	image.set(52, 41, red);
+    std::vector <Face> faces = parser.buildFaces(vertices);
+
+	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
+    for (Vertex &vertex: vertices){
+        image.set(vertex.getX(), vertex.getY(), red);
+    }
+
+    for (Face &face: faces){
+        face.draw_triangle(image, red);
+    }
+	//image.set(52, 41, red);
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
 	image.write_tga_file("output.tga");
 	return 0;
