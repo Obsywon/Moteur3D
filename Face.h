@@ -19,8 +19,8 @@ public:
     Face(const std::vector<Vertex> &vertices);
     ~Face();
 
-
-    void draw_triangle(TGAImage &img, TGAColor color);
+    
+    void draw_line_triangle(TGAImage &img, TGAColor color);
     
 };
 

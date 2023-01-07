@@ -14,19 +14,19 @@ void Vertex::resize(const int width, const int height){
     _y = (_y * h) + h;
 }
 
-int Vertex::getX(){
+int Vertex::getX() const{
     return static_cast<int>(_x);
 }
 
-int Vertex::getY(){
+int Vertex::getY() const{
     return static_cast<int> (_y);
 }
 
-int Vertex::getZ(){
+int Vertex::getZ() const{
     return static_cast<int> (_z);
 }
 
-void Vertex::draw_line (Vertex &end, TGAImage &img, TGAColor color){
+void Vertex::draw_line (const Vertex &end, TGAImage &img, TGAColor color) const{
 
     int x0 = getX();
     int y0 = getY();

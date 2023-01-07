@@ -22,11 +22,11 @@ public:
     Vertex(const float x, const float y, const float z);
     ~Vertex();
 
-    int getX();
-    int getY();
-    int getZ();
+    int getX() const;
+    int getY() const;
+    int getZ() const;
 
-    void draw_line (Vertex &end, TGAImage &img, TGAColor color);
+    void draw_line (const Vertex &end, TGAImage &img, TGAColor color) const;
 
 
     void resize(const int width, const int height);
