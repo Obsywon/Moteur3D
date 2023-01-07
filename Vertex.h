@@ -10,9 +10,9 @@
 class Vertex
 {
 private:
-    float _x;
-    float _y;
-    float _z;
+    float m_x;
+    float m_y;
+    float m_z;
 
     friend std::ostream& operator <<(std::ostream &s, const Vertex& vertex);
     friend bool operator== (Vertex &s, Vertex &t);
@@ -26,8 +26,11 @@ public:
     int getY() const;
     int getZ() const;
 
-    void draw_line (const Vertex &end, TGAImage &img, TGAColor color) const;
 
+    void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;
+
+
+    void draw_line (const Vertex &end, TGAImage &img, TGAColor color) const;
 
     void resize(const int width, const int height);
 };

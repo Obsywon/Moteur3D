@@ -10,7 +10,7 @@
 class Face
 {
 private:
-    const std::vector<Vertex> _vertices;
+    const std::vector<Vertex> m_vertices;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
 
@@ -19,8 +19,15 @@ public:
     Face(const std::vector<Vertex> &vertices);
     ~Face();
 
-    
-    void draw_line_triangle(TGAImage &img, TGAColor color);
+    /**
+     * Dessine les segments du triangle
+    */
+    void draw_line_triangle(TGAImage &img, TGAColor color) const;
+
+    /**
+     * Dessine un triangle rempli
+    */
+    void draw_triangle(TGAImage &img, TGAColor color);
     
 };
 

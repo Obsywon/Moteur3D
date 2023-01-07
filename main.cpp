@@ -13,27 +13,7 @@ constexpr int WIDTH {500};
 
 
 
-void line (int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color){
-	bool steep = false; 
-    if (std::abs(x0-x1)<std::abs(y0-y1)) { // if the line is steep, we transpose the image 
-        std::swap(x0, y0); 
-        std::swap(x1, y1); 
-        steep = true; 
-    } 
-    if (x0>x1) { // make it left−to−right 
-        std::swap(x0, x1); 
-        std::swap(y0, y1); 
-    } 
-    for (int x=x0; x<=x1; x++) { 
-        float t = (x-x0)/(float)(x1-x0); 
-        int y = y0*(1.-t) + y1*t; 
-        if (steep) { 
-            img.set(y, x, color); // if transposed, de−transpose 
-        } else { 
-            img.set(x, y, color); 
-        } 
-    }  
-}
+
 
 
 int main(int argc, char** argv) {
@@ -43,12 +23,11 @@ int main(int argc, char** argv) {
     std::vector <Face> faces = parser.buildFaces(vertices);
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
-    for (Vertex &vertex: vertices){
-        image.set(vertex.getX(), vertex.getY(), red);
-    }
+
 
     for (Face &face: faces){
         face.draw_line_triangle(image, blue);
+        face.draw_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
