@@ -1,16 +1,23 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string &path) : _path{path}
+Parser::Parser(const std::string &path, const int width, const int height)
 {
+    // Initialisation des structures:
+    std::vector <std::string> words;
+
+
     // Lecture et enregistrement de chaque ligne du fichier dans le vector
-    std::ifstream file(_path);
+    std::ifstream file(path);
     if (file.is_open())
     {
         std::string current_line;
 
         while (std::getline(file, current_line))
         {
-            _lines.push_back(current_line);
+            if (current_line.size() <= 2) continue;
+            parseLine(current_line, words);
+            buildVertexes(words, width, height);
+            buildFaces(words);
         }
 
         file.close();
@@ -22,6 +29,15 @@ Parser::Parser(const std::string &path) : _path{path}
 }
 
 Parser::~Parser() {}
+
+
+
+std::vector <Vertex> Parser::getVertexes () const{
+    return m_vertices;
+}
+std::vector <Face> Parser::getFaces () const{
+    return m_faces;
+}
 
 void Parser::parseLine(const std::string &line, std::vector<std::string> &words)
 {
@@ -37,80 +53,65 @@ void Parser::parseLine(const std::string &line, std::vector<std::string> &words)
     }
 }
 
-std::array <int,3> Parser::parsePartFace (std::string &word){
+std::array<int, 3> Parser::parsePartFace(std::string &word)
+{
     std::array<int, 3> array;
     std::stringstream stream(word);
     std::string temp;
     int index;
     index = 0;
 
-    while (std::getline(stream, temp, '/')){
+    while (std::getline(stream, temp, '/'))
+    {
         array[index] = std::stoi(temp);
         index++;
     }
     return array;
 }
 
-const std::vector<Vertex> Parser::buildVertexes(const int width, const int height)
+void Parser::buildVertexes(std::vector <std::string> &words, const int width, const int height)
 {
-    std::vector<Vertex> vertices;     // Contient les vertices finales
-    std::vector<std::string> words; // Contient les éléments de la ligne avant création d'un noeud
+    // Contient les vertices finales
     std::string temp;
 
     float x, y, z; // valeurs d'une Vertex
+    
 
-    for (const std::string &line : _lines)
-    {
-        if (line.size() <= 2)
-            continue;
-        parseLine(line, words);
-
-        // Création des vertices
-        if (words.at(0).compare("v") == 0 && words.size() == 4)
-        {
-            x = std::stof(words.at(1));
-            y = std::stof(words.at(2));
-            z = std::stof(words.at(3));
-            Vertex vertex = Vertex(x, y, z);
-            vertex.resize(width, height);
-            vertices.push_back(vertex);
-        }
+    // Création des vertices
+    if (words.at(0).compare("v") != 0 || words.size() != 4){
+        return;
     }
-    return vertices;
+    x = std::stof(words.at(1));
+    y = std::stof(words.at(2));
+    z = std::stof(words.at(3));
+    Vertex vertex = Vertex(x, y, z);
+    vertex.resize(width, height);
+    m_vertices.push_back(vertex);
+    
+    
 }
 
-
-const std::vector<Face> Parser::buildFaces (const std::vector <Vertex> &vertices){
-    std::vector <Face> faces;
-    std::vector <Vertex> local_vertices;
-    std::vector <std::string> words;
+void Parser::buildFaces(std::vector <std::string> &words)
+{
+    std::vector<Vertex> local_vertices;
     std::array<int, 3> f1, f2, f3;
 
 
-    for (const std::string &line : _lines)
-    {
-        if (line.size() <= 2)
-            continue;
-        parseLine(line, words);
-
-        // Création des faces
-        if (words.at(0).compare("f") == 0 && words.size() == 4)
-        {
-            f1 = parsePartFace(words.at(1));
-            f2 =  parsePartFace(words.at(2));
-            f3 = parsePartFace(words.at(3));
-
-            local_vertices.clear();
-            local_vertices.push_back(vertices.at(f1[0] - 1));
-            local_vertices.push_back(vertices.at(f2[0] - 1));
-            local_vertices.push_back(vertices.at(f3[0] - 1));
-
-            Face face = Face(local_vertices);
-            faces.push_back(face);
-        }
+    // Création des faces
+    if (words.at(0).compare("f") != 0 || words.size() != 4){
+        return;
     }
-    std::cout << faces.at(0);
-    return faces;
+    
+    f1 = parsePartFace(words.at(1));
+    f2 = parsePartFace(words.at(2));
+    f3 = parsePartFace(words.at(3));
+
+    local_vertices.push_back(m_vertices.at(f1[0] - 1));
+    local_vertices.push_back(m_vertices.at(f2[0] - 1));
+    local_vertices.push_back(m_vertices.at(f3[0] - 1));
 
 
+    Face face = Face(local_vertices);
+    m_faces.push_back(face);
+    
 }

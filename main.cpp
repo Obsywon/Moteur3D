@@ -17,10 +17,10 @@ constexpr int WIDTH {500};
 
 
 int main(int argc, char** argv) {
-    Parser parser("./obj/african_head/african_head.obj");
-    std::vector<Vertex> vertices = parser.buildVertexes(WIDTH, HEIGHT);
-
-    std::vector <Face> faces = parser.buildFaces(vertices);
+    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT);
+    
+    std::vector<Vertex> vertices = parser.getVertexes();
+    std::vector <Face> faces = parser.getFaces();
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
 

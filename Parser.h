@@ -13,18 +13,21 @@
 class Parser
 {
 private:
-    std::vector <std::string> _lines;
-    const std::string& _path;
-    
-public:
-    
-    Parser(const std::string& path);
-    ~Parser();
+    std::vector <Vertex> m_vertices;
+    std::vector<Face> m_faces;
+
 
     void parseLine (const std::string &line, std::vector <std::string> &words);
     std::array <int,3> parsePartFace (std::string &word);
-    const std::vector<Vertex> buildVertexes(const int width, const int height);
-    const std::vector<Face> buildFaces (const std::vector <Vertex> &vertices);
+    void buildVertexes(std::vector <std::string> &words, const int width, const int height);
+    void buildFaces (std::vector <std::string> &words);
+    
+public:
+    
+    Parser(const std::string& path, const int width, const int height);
+    ~Parser();
+    std::vector <Vertex> getVertexes () const;
+    std::vector <Face> getFaces () const;
 
 };
 
