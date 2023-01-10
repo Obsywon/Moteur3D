@@ -25,3 +25,38 @@ Nécessité de parser les fichiers obj et récupérer uniquement les sommets (li
 
 Lignes commençant par f : sur une ligne, chaque triplet: prendre la première valeur de chaque triplet.
 décrémenter de 1 (dans liste de noeuds) pour retrouver les triangles
+
+
+Dans un triangle, on associe a chaque point un poids alpha, beta, gamma;
+si un de ces poids sont négatifs, point est à l'exterieur.
+p = alpha* A + beta* B + gamma * C 
+
+Pour calculer ces poids :
+Ax * alpha + Bx * beta + Cx * gamma = Px 
+Ay * alpha + By * beta + Cy * gamme = Py
+alpha + beta + gamma = 1
+
+On peut remettre sous forme de matrice :
+(alpha
+beta
+gamma)
+ = 
+( Ax Bx Cx 
+Ay By Cy 
+1 1 1)
+/
+(Px 
+Py 
+1)
+
+Même idée mais sur un segment avec P entre A et B:
+beta = P - A / B - A
+alpha = B - P / B - A 
+
+Et sur un triangle ABC :
+Alpha = aire(PBC) / aire (ABC)
+Beta = aire (PCA) / aire (ABC)
+gamma = aire (PAB) / arie (ABC)
+
+!! aire signée dans l'ordre counter clockwise
+-> Triangle peut être négatif. Si le triangle ABC est > 0 et l'aire de l'autre est négatif, P est dehors.

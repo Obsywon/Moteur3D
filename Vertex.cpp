@@ -40,7 +40,8 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
     } 
     for (int x=x0; x<=x1; x++) { 
         float t = (x-x0)/(float)(x1-x0); 
-        int y = y0*(1.-t) + y1*t; 
+        int y = y0 + (y1 - y0) * t; 
+
         if (steep) { 
             img.set(y, x, color); // if transposed, de−transpose 
         } else { 

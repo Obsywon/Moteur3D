@@ -27,7 +27,7 @@ int main(int argc, char** argv) {
 
     for (Face &face: faces){
         face.draw_line_triangle(image, blue);
-        face.draw_triangle(image, green);
+        //face.draw_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
