@@ -11,7 +11,13 @@ constexpr int HEIGHT {500};
 constexpr int WIDTH {500};
 
 
+const TGAColor randomize_color (){
+    std::random_device rd;
+    std::default_random_engine engine(rd());
+    std::uniform_int_distribution<int> distr(0, 255);
 
+    return TGAColor(distr(engine), distr(engine), distr(engine), 255);
+}
 
 
 
@@ -26,8 +32,8 @@ int main(int argc, char** argv) {
 
 
     for (Face &face: faces){
-        face.draw_line_triangle(image, blue);
-        //face.draw_triangle(image, green);
+        face.draw_triangle(image, randomize_color());
+        face.draw_line_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image

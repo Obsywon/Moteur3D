@@ -16,19 +16,19 @@ void Vertex::resize(const int width, const int height){
 }
 
 int Vertex::getX() const{
-    return static_cast<int>(m_x);
+    return round(m_x);
 }
 
 int Vertex::getY() const{
-    return static_cast<int> (m_y);
+    return round(m_y);
 }
 
 int Vertex::getZ() const{
-    return static_cast<int> (m_z);
+    return round(m_z);
 }
 
 void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const {
-	bool steep = false; 
+	bool steep = false;     
     if (std::abs(x0-x1)<std::abs(y0-y1)) { // if the line is steep, we transpose the image 
         std::swap(x0, y0); 
         std::swap(x1, y1); 
