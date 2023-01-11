@@ -34,6 +34,10 @@ public:
     void draw_line (const Vertex &end, TGAImage &img, TGAColor color) const;
 
     void resize(const int width, const int height);
+
+    void normalize(){
+        
+    }
 };
 
 

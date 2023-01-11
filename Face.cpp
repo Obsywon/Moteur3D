@@ -15,13 +15,6 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
 void Face::draw_triangle(TGAImage &img, TGAColor color) const
 {
     std::array <int, 4> box = load_bounding_box();
-    
-    /*
-    m_vertices[0].rasterize_line(box[0], box[0], box[1], box[3], img, red);
-    m_vertices[0].rasterize_line(box[0], box[2], box[1], box[1], img, red);
-    m_vertices[0].rasterize_line(box[2], box[2], box[1], box[3], img, red);
-    m_vertices[0].rasterize_line(box[0], box[2], box[3], box[3], img, red);
-    */
 
     // Remplir le reectangle
     for (int x = box[0]; x <= box[2]; x++){
@@ -79,8 +72,7 @@ bool Face::check_pixel_in_triangle(const int x, const int y) const
     int area2 = calculate_area(m_vertices[1], m_vertices[2], x, y);
     int area3 = calculate_area(m_vertices[0], m_vertices[2], x, y);
 
-    //std::cout << m_fullArea << " ?= " <<  (area1 + area2 + area3) << std::endl;
-
+    //std::cout << area1 << " / " << m_fullArea << " = " << static_cast<float>((float)area1 / (float)m_fullArea) << std::endl;
     return (m_fullArea == (area1 + area2 + area3));
 }
 
