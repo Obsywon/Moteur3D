@@ -14,6 +14,8 @@ private:
     float m_x;
     float m_y;
     float m_z;
+    TGAColor m_color;
+    double m_coef;
 
     friend std::ostream& operator <<(std::ostream &s, const Vertex& vertex);
     friend bool operator== (Vertex &s, Vertex &t);
@@ -26,6 +28,12 @@ public:
     int getX() const;
     int getY() const;
     int getZ() const;
+
+    void setCoef (double coef);
+    double getCoef() const;
+
+    void setColor (TGAColor color);
+    TGAColor getColor();
 
 
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;

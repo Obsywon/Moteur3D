@@ -16,6 +16,9 @@ private:
     std::vector <Vertex> m_vertices;
     std::vector<Face> m_faces;
 
+    std::uniform_int_distribution<int> m_distr; 
+    std::default_random_engine m_engine;
+
 
     void parseLine (const std::string &line, std::vector <std::string> &words);
     std::array <int,3> parsePartFace (std::string &word);
@@ -26,8 +29,10 @@ public:
     
     Parser(const std::string& path, const int width, const int height);
     ~Parser();
-    std::vector <Vertex> getVertexes () const;
-    std::vector <Face> getFaces () const;
+    std::vector <Vertex> getVertexes ();
+    std::vector <Face> getFaces ();
+
+    const TGAColor randomize_color();
 
 };
 

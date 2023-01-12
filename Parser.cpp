@@ -5,6 +5,10 @@ Parser::Parser(const std::string &path, const int width, const int height)
     // Initialisation des structures:
     std::vector <std::string> words;
 
+    std::random_device rd;
+    m_engine = std::default_random_engine(rd());
+    m_distr = std::uniform_int_distribution<int>(0, 255);
+
 
     // Lecture et enregistrement de chaque ligne du fichier dans le vector
     std::ifstream file(path);
@@ -32,11 +36,15 @@ Parser::~Parser() {}
 
 
 
-std::vector <Vertex> Parser::getVertexes () const{
+std::vector <Vertex> Parser::getVertexes (){
     return m_vertices;
 }
-std::vector <Face> Parser::getFaces () const{
+std::vector <Face> Parser::getFaces (){
     return m_faces;
+}
+
+const TGAColor Parser::randomize_color (){
+    return TGAColor(m_distr(m_engine), m_distr(m_engine), m_distr(m_engine), 255);
 }
 
 void Parser::parseLine(const std::string &line, std::vector<std::string> &words)
@@ -86,6 +94,7 @@ void Parser::buildVertexes(std::vector <std::string> &words, const int width, co
     z = std::stof(words.at(3));
     Vertex vertex = Vertex(x, y, z);
     vertex.resize(width, height);
+    vertex.setColor(randomize_color());
     m_vertices.push_back(vertex);
     
     

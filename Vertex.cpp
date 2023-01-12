@@ -1,7 +1,7 @@
 #include "Vertex.h"
 
-Vertex::Vertex(const float x, const float y, const float z): m_x{x}, m_y{y}, m_z{z}{
-
+Vertex::Vertex(const float x, const float y, const float z): m_x{x}, m_y{y}, m_z{z}, 
+    m_color{TGAColor(0,0,0,0)}, m_coef{0.0}{
 }
 
 Vertex::~Vertex(){}
@@ -26,6 +26,23 @@ int Vertex::getY() const{
 int Vertex::getZ() const{
     return round(m_z);
 }
+
+void Vertex::setCoef (double coef){
+    m_coef = coef;
+}
+
+double Vertex::getCoef() const {
+    return m_coef;
+}
+
+void Vertex::setColor (TGAColor color){
+    m_color = color;
+}
+
+TGAColor Vertex::getColor (){
+    return m_color;
+}
+
 
 void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const {
 	bool steep = false;     

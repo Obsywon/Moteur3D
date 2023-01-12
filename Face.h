@@ -14,7 +14,7 @@
 class Face
 {
 private:
-    const std::vector<Vertex> m_vertices;
+    std::vector<Vertex> m_vertices;
     int m_fullArea;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
@@ -22,7 +22,7 @@ private:
 
 
 public:
-    Face(const std::vector<Vertex> &vertices);
+    Face(std::vector<Vertex> &vertices);
     ~Face();
 
     /**
@@ -33,13 +33,13 @@ public:
     /**
      * Dessine un triangle rempli
     */
-    void draw_triangle(TGAImage &img, TGAColor color) const;
+    void draw_triangle(TGAImage &img, TGAColor color);
 
 
     /**
      * Vérifie si le pixel se situe dans le triangle
     */
-    bool check_pixel_in_triangle(const int x, const int y) const;
+    bool check_pixel_in_triangle(const int x, const int y);
 
 
     int calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;
@@ -47,7 +47,7 @@ public:
 
     int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
 
-    
+    TGAColor intensity();
 };
 
 #endif //__FACE_H__
