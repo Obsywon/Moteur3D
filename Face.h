@@ -10,6 +10,12 @@
 #include "Vertex.h"
 
 
+struct vecteur {
+    double x;
+    double y;
+    double z;
+};
+
 
 class Face
 {
@@ -47,7 +53,7 @@ public:
 
     int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
 
-    TGAColor intensity();
+    double color_intensity(const vecteur& light);
 };
 
 #endif //__FACE_H__

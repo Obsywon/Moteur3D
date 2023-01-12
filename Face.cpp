@@ -17,6 +17,9 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
 void Face::draw_triangle(TGAImage &img, TGAColor color)
 {
     std::array<int, 4> box = load_bounding_box();
+    vecteur light = {0, 0, -1};
+    double intensity;
+    
 
     // Remplir le reectangle
     for (int x = box[0]; x <= box[2]; x++)
@@ -25,14 +28,43 @@ void Face::draw_triangle(TGAImage &img, TGAColor color)
         {
             if (check_pixel_in_triangle(x, y))
             {
-                img.set(x, y, color);
+                intensity = color_intensity(light);
+                if (intensity > 0){
+                    img.set(x, y, TGAColor(255 * intensity, 255 * intensity, 255 * intensity, 255 * intensity));
+                }
             }
         }
     }
 }
 
-TGAColor Face::intensity(){
-    float vector0 = m_vertices[1].getX() - m_vertices[0].getX();
+double Face::color_intensity(const vecteur& light){
+
+    vecteur v01 = {  
+        m_vertices[1].getX() - m_vertices[0].getX(), 
+        m_vertices[1].getY() - m_vertices[0].getY(), 
+        m_vertices[1].getZ() - m_vertices[0].getZ()
+    };
+
+    vecteur v02 = {  
+        m_vertices[2].getX() - m_vertices[0].getX(), 
+        m_vertices[2].getY() - m_vertices[0].getY(), 
+        m_vertices[2].getZ() - m_vertices[0].getZ()
+    };
+    vecteur normal = {
+        v01.y * v02.z - v01.z * v02.y,
+        v01.z * v02.x - v01.x * v02.z,
+        v01.x * v02.y - v01.y * v02.x,
+    };
+
+    double longueur = std::sqrt((normal.x * normal.x) + 
+                    (normal.y * normal.y) + (normal.z * normal.z));
+
+    normal.x /= longueur;
+    normal.y /= longueur;
+    normal.z /= longueur;
+
+    double intensity = -((light.x * normal.x) + (light.y * normal.y) + (light.z * normal.z));
+    return intensity;
 }
 
 void Face::draw_line_triangle(TGAImage &img, TGAColor color) const
@@ -57,21 +89,21 @@ std::array<int, 4> Face::load_bounding_box() const
 
     for (const Vertex &v : m_vertices)
     {
-        if (v.getX() >= max_x)
+        if (v.roundX() >= max_x)
         {
-            max_x = v.getX();
+            max_x = v.roundX();
         }
-        if (v.getY() >= max_y)
+        if (v.roundY() >= max_y)
         {
-            max_y = v.getY();
+            max_y = v.roundY();
         }
-        if (v.getX() <= min_x)
+        if (v.roundX() <= min_x)
         {
-            min_x = v.getX();
+            min_x = v.roundX();
         }
-        if (v.getY() <= min_y)
+        if (v.roundY() <= min_y)
         {
-            min_y = v.getY();
+            min_y = v.roundY();
         }
     }
 
@@ -98,10 +130,10 @@ bool Face::check_pixel_in_triangle(const int x, const int y)
 
 int Face::calculate_area(const Vertex &v1, const Vertex &v2, const Vertex &v3) const
 {
-    return calculate_area(v1, v2, v3.getX(), v3.getY());
+    return calculate_area(v1, v2, v3.roundX(), v3.roundY());
 }
 
 int Face::calculate_area(const Vertex &v1, const Vertex &v2, int x, int y) const
 {
-    return (v1.getX() * (v2.getY() - y) + v2.getX() * (y - v1.getY()) + x * (v1.getY() - v2.getY()));
+    return (v1.roundX() * (v2.roundY() - y) + v2.roundX() * (y - v1.roundY()) + x * (v1.roundY() - v2.roundY()));
 }

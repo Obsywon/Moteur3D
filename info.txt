@@ -60,3 +60,7 @@ gamma = aire (PAB) / arie (ABC)
 
 !! aire signée dans l'ordre counter clockwise
 -> Triangle peut être négatif. Si le triangle ABC est > 0 et l'aire de l'autre est négatif, P est dehors.
+
+
+
+

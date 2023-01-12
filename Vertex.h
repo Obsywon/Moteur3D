@@ -11,9 +11,14 @@
 class Vertex
 {
 private:
-    float m_x;
-    float m_y;
-    float m_z;
+    double m_x;
+    double m_y;
+    double m_z;
+
+    double m_ox;
+    double m_oy;
+    double m_oz;    
+
     TGAColor m_color;
     double m_coef;
 
@@ -22,12 +27,18 @@ private:
 
 public:
     
-    Vertex(const float x, const float y, const float z);
+    Vertex(const double x, const double y, const double z);
+
+
     ~Vertex();
 
-    int getX() const;
-    int getY() const;
-    int getZ() const;
+    int roundX() const;
+    int roundY() const;
+    int roundZ() const;
+
+    double getX() const;
+    double getY() const;
+    double getZ() const;
 
     void setCoef (double coef);
     double getCoef() const;

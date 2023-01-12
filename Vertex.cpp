@@ -1,7 +1,10 @@
 #include "Vertex.h"
 
-Vertex::Vertex(const float x, const float y, const float z): m_x{x}, m_y{y}, m_z{z}, 
-    m_color{TGAColor(0,0,0,0)}, m_coef{0.0}{
+Vertex::Vertex(const double x, const double y, const double z): m_x{x}, m_y{y}, m_z{z}, 
+    m_color{TGAColor(0,0,0,0)}, m_coef{0.0} {
+        m_ox = x;
+        m_oy = y;
+        m_oz = z;
 }
 
 Vertex::~Vertex(){}
@@ -15,16 +18,29 @@ void Vertex::resize(const int width, const int height){
     m_y = (m_y * h) + h;
 }
 
-int Vertex::getX() const{
+int Vertex::roundX() const{
     return round(m_x);
 }
 
-int Vertex::getY() const{
+int Vertex::roundY() const{
     return round(m_y);
 }
 
-int Vertex::getZ() const{
+int Vertex::roundZ() const{
     return round(m_z);
+}
+
+double Vertex::getX() const {
+    return m_ox;
+}
+
+double Vertex::getY() const {
+    return m_oy;
+}
+
+
+double Vertex::getZ() const {
+    return m_oz;
 }
 
 void Vertex::setCoef (double coef){
@@ -56,7 +72,7 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
         std::swap(y0, y1); 
     } 
     for (int x=x0; x<=x1; x++) { 
-        float t = (x-x0)/(float)(x1-x0); 
+        double t = (x-x0)/(double)(x1-x0); 
         int y = y0 + (y1 - y0) * t; 
 
         if (steep) { 
@@ -69,11 +85,11 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
 
 void Vertex::draw_line (const Vertex &end, TGAImage &img, TGAColor color) const{
 
-    int x0 = getX();
-    int y0 = getY();
+    int x0 = roundX();
+    int y0 = roundY();
 
-    int x1 = end.getX();
-    int y1 = end.getY();
+    int x1 = end.roundX();
+    int y1 = end.roundY();
 
 	rasterize_line(x0, x1, y0, y1, img, color);
 }

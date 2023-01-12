@@ -82,7 +82,7 @@ void Parser::buildVertexes(std::vector <std::string> &words, const int width, co
     // Contient les vertices finales
     std::string temp;
 
-    float x, y, z; // valeurs d'une Vertex
+    double x, y, z; // valeurs d'une Vertex
     
 
     // Création des vertices
