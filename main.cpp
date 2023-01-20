@@ -16,20 +16,14 @@ std::default_random_engine &engine){
 
 int main(int argc, char** argv) {
 
-    //double z_buffer[HEIGHT * WIDTH] = {-std::numeric_limits<double>::max()};
-
     double *z_buffer = new double[WIDTH*HEIGHT];
     for (int i=WIDTH*HEIGHT; i--; z_buffer[i] = -std::numeric_limits<double>::max());
 
-    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT);
+    TGAImage texture = TGAImage();
+    texture.read_tga_file("./obj/african_head/african_head_diffuse.tga");
+    texture.flip_horizontally();
 
-    // Générateur aléatoire de couleur
-    /*
-    std::random_device rd;
-    std::default_random_engine engine(rd());
-    std::uniform_int_distribution<int> distr(0, 255);
-    */
-
+    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
 
     std::vector <Face> faces = parser.getFaces();
 
@@ -37,7 +31,7 @@ int main(int argc, char** argv) {
 
 
     for (Face &face: faces){
-        face.draw_triangle(image, green, z_buffer);
+        face.draw_triangle(image, green, z_buffer, texture);
         //face.draw_line_triangle(image, green);
     }
 

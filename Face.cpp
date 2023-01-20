@@ -1,6 +1,6 @@
 #include "Face.h"
 
-Face::Face(std::vector<Vertex> &vertices) : m_vertices{vertices}
+Face::Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures) : m_vertices{vertices}, m_textures{textures}
 {
     m_fullArea = calculate_area(m_vertices[0], m_vertices[1], m_vertices[2]);
 }
@@ -13,7 +13,7 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
              << face.m_vertices.at(1) << ", " << face.m_vertices.at(2) << ") " << std::endl;
 }
 
-void Face::draw_triangle(TGAImage &img, TGAColor color, double *z_buffer)
+void Face::draw_triangle(TGAImage &img, TGAColor color, double *z_buffer, const TGAImage &texture)
 {
     std::array<int, 4> box = load_bounding_box();
     std::array<double, 4> baryocentric = {0};

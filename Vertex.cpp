@@ -1,7 +1,6 @@
 #include "Vertex.h"
 
-Vertex::Vertex(const double x, const double y, const double z): m_x{x}, m_y{y}, m_z{z}, 
-    m_color{TGAColor(0,0,0,0)}, m_coef{0.0} {
+Vertex::Vertex(const double x, const double y, const double z): m_x{x}, m_y{y}, m_z{z} {
         m_ox = x;
         m_oy = y;
         m_oz = z;
@@ -43,13 +42,6 @@ double Vertex::getZ() const {
     return m_oz;
 }
 
-void Vertex::setColor (TGAColor color){
-    m_color = color;
-}
-
-TGAColor Vertex::getColor (){
-    return m_color;
-}
 
 
 void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const {

@@ -8,6 +8,7 @@
 #include <array>
 #include <random>
 #include "Vertex.h"
+#include "Texture.h"
 
 constexpr int HEIGHT {1000};
 constexpr int WIDTH {1000};
@@ -23,6 +24,7 @@ class Face
 {
 private:
     std::vector<Vertex> m_vertices;
+    std::vector<Texture> m_textures;
     int m_fullArea;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
@@ -30,7 +32,7 @@ private:
 
 
 public:
-    Face(std::vector<Vertex> &vertices);
+    Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures);
     ~Face();
 
     /**
@@ -41,7 +43,7 @@ public:
     /**
      * Dessine un triangle rempli
     */
-    void draw_triangle(TGAImage &img, TGAColor color, double* z_buffer);
+    void draw_triangle(TGAImage &img, TGAColor color, double* z_buffer, const TGAImage &texture);
 
 
     int calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;

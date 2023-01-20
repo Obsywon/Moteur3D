@@ -73,3 +73,6 @@ les b correspondent aux indices d'un nuage vt (+1)
 (entre 0 et 1, à remettre à la taille de l'image)
 Interpolation des coordonnées U,V pour récupérer la couleur dans la texture 
 (u, v) = alpa . (u1; v1) + beta (u2, v2) + gamma (u3, v3)
+
+a.x * alpha + b.x * beta + c.x * gamma 
+avec a,b et c : sommets de la texture

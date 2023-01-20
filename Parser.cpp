@@ -1,13 +1,10 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string &path, const int width, const int height)
+Parser::Parser(const std::string &path, const int width, const int height, const TGAImage &texture):
+m_texture{texture}
 {
     // Initialisation des structures:
-    std::vector <std::string> words;
-
-    std::random_device rd;
-    m_engine = std::default_random_engine(rd());
-    m_distr = std::uniform_int_distribution<int>(0, 255);
+    std::vector<std::string> words;
 
 
     // Lecture et enregistrement de chaque ligne du fichier dans le vector
@@ -18,9 +15,11 @@ Parser::Parser(const std::string &path, const int width, const int height)
 
         while (std::getline(file, current_line))
         {
-            if (current_line.size() <= 2) continue;
+            if (current_line.size() <= 2)
+                continue;
             parseLine(current_line, words);
             buildVertexes(words, width, height);
+            buildTextures(current_line);
             buildFaces(words);
         }
 
@@ -34,16 +33,17 @@ Parser::Parser(const std::string &path, const int width, const int height)
 
 Parser::~Parser() {}
 
-
-
-std::vector <Vertex> Parser::getVertexes (){
+std::vector<Vertex> Parser::getVertexes()
+{
     return m_vertices;
 }
-std::vector <Face> Parser::getFaces (){
+std::vector<Face> Parser::getFaces()
+{
     return m_faces;
 }
 
-const TGAColor Parser::randomize_color (){
+const TGAColor Parser::randomize_color()
+{
     return TGAColor(m_distr(m_engine), m_distr(m_engine), m_distr(m_engine), 255);
 }
 
@@ -66,8 +66,7 @@ std::array<int, 3> Parser::parsePartFace(std::string &word)
     std::array<int, 3> array;
     std::stringstream stream(word);
     std::string temp;
-    int index;
-    index = 0;
+    int index = 0;
 
     while (std::getline(stream, temp, '/'))
     {
@@ -77,40 +76,48 @@ std::array<int, 3> Parser::parsePartFace(std::string &word)
     return array;
 }
 
-void Parser::buildVertexes(std::vector <std::string> &words, const int width, const int height)
+void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height)
 {
     // Contient les vertices finales
-    std::string temp;
-
-    double x, y, z; // valeurs d'une Vertex
-    
+    double x, y, z; 
 
     // Création des vertices
-    if (words.at(0).compare("v") != 0 || words.size() != 4){
+    if (words.size() != 4)
+    {
         return;
     }
-    x = std::stof(words.at(1));
-    y = std::stof(words.at(2));
-    z = std::stof(words.at(3));
-    Vertex vertex = Vertex(x, y, z);
-    vertex.resize(width, height);
-    vertex.setColor(randomize_color());
-    m_vertices.push_back(vertex);
-    
-    
+    if (words.at(0).compare("v") == 0)
+    {
+        x = std::stof(words.at(1));
+        y = std::stof(words.at(2));
+        z = std::stof(words.at(3));
+        Vertex vertex = Vertex(x, y, z);
+        vertex.resize(width, height);
+        m_vertices.push_back(vertex);
+    }    
 }
 
-void Parser::buildFaces(std::vector <std::string> &words)
+void Parser::buildTextures(std::string &line){
+    if (line[0] == 'v' && line[1] == 't'){
+        std::cout << "Test" << std::endl;
+
+        // use .find() et substring()
+    }
+
+}
+
+void Parser::buildFaces(std::vector<std::string> &words)
 {
     std::vector<Vertex> local_vertices;
+    std::vector<Texture> local_textures;
     std::array<int, 3> f1, f2, f3;
 
-
     // Création des faces
-    if (words.at(0).compare("f") != 0 || words.size() != 4){
+    if (words.at(0).compare("f") != 0 || words.size() != 4)
+    {
         return;
     }
-    
+
     f1 = parsePartFace(words.at(1));
     f2 = parsePartFace(words.at(2));
     f3 = parsePartFace(words.at(3));
@@ -119,8 +126,12 @@ void Parser::buildFaces(std::vector <std::string> &words)
     local_vertices.push_back(m_vertices.at(f2[0] - 1));
     local_vertices.push_back(m_vertices.at(f3[0] - 1));
 
-
-    Face face = Face(local_vertices);
+    //std::cout << m_textures.size();
+    /*
+    local_textures.push_back(m_textures.at(f1[1] - 1));
+    local_textures.push_back(m_textures.at(f2[1] - 1));
+    local_textures.push_back(m_textures.at(f3[1] - 1));
+    */
+    Face face = Face(local_vertices, local_textures);
     m_faces.push_back(face);
-    
 }
