@@ -21,7 +21,7 @@ int main(int argc, char** argv) {
 
     TGAImage texture = TGAImage();
     texture.read_tga_file("./obj/african_head/african_head_diffuse.tga");
-    texture.flip_horizontally();
+    texture.flip_vertically();
 
     Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
 
@@ -31,7 +31,7 @@ int main(int argc, char** argv) {
 
 
     for (Face &face: faces){
-        face.draw_triangle(image, green, z_buffer, texture);
+        face.draw_triangle(image, z_buffer, texture);
         //face.draw_line_triangle(image, green);
     }
 

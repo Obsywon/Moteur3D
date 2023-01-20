@@ -43,7 +43,7 @@ public:
     /**
      * Dessine un triangle rempli
     */
-    void draw_triangle(TGAImage &img, TGAColor color, double* z_buffer, const TGAImage &texture);
+    void draw_triangle(TGAImage &img, double* z_buffer, TGAImage &texture);
 
 
     int calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;

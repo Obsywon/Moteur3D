@@ -13,31 +13,44 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
              << face.m_vertices.at(1) << ", " << face.m_vertices.at(2) << ") " << std::endl;
 }
 
-void Face::draw_triangle(TGAImage &img, TGAColor color, double *z_buffer, const TGAImage &texture)
+void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
 {
     std::array<int, 4> box = load_bounding_box();
-    std::array<double, 4> baryocentric = {0};
+    std::array<double, 4> baryo = {0};
     vecteur light = {0, 0, -1};
     double intensity;
-    int indice;
+    int indice, x_texture, y_texture;
+    TGAColor color;
 
     // Remplir le reectangle
     for (int x = box[0]; x <= box[2]; x++)
     {
         for (int y = box[1]; y <= box[3]; y++)
         {
-            baryocentric = baryocentric_values(x, y);
+            baryo = baryocentric_values(x, y);
             indice = int(x + y * WIDTH);
 
-            if (baryocentric[0] > -0.01 && baryocentric[1] > -0.01 && baryocentric[2] > -0.01)
+            if (baryo[0] > -0.0001 && baryo[1] > -0.0001 && baryo[2] > -0.0001)
             {
 
-                if (z_buffer[indice] < baryocentric[3])
+                if (z_buffer[indice] < baryo[3])
                 {
-                    z_buffer[indice] = baryocentric[3];
-                    intensity = color_intensity(light);
-                    img.set(x, y, TGAColor(255 * intensity, 255 * intensity, 255 * intensity, 255 * intensity));
+                    // calcul z-index : pixel doit être rasterisé
+                    z_buffer[indice] = baryo[3];
+
+                    x_texture = baryo[0] * m_textures[0].getRoundX() +
+                                    baryo[1] * m_textures[1].getRoundX() +
+                                    baryo[2] * m_textures[2].getRoundX();
+                    y_texture = baryo[0] * m_textures[0].getRoundY() +
+                                    baryo[1] * m_textures[1].getRoundY() +
+                                    baryo[2] * m_textures[2].getRoundY();
                     
+                    color = texture.get(x_texture, y_texture);
+
+                    // Intensité lumineuse
+                    intensity = color_intensity(light);
+                    if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a * intensity));
+                
                 }
             }
         }
@@ -129,9 +142,9 @@ std::array<double, 4> Face::baryocentric_values(const int x, const int y) const
     double beta = (double)area3 / (double)m_fullArea;
     double gamma = (double)area1 / (double)m_fullArea;
 
-    double baryo_z = alpha * m_vertices[1].getZ() +
-                     beta * m_vertices[2].getZ() +
-                     gamma * m_vertices[0].getZ();
+    double baryo_z = alpha * m_vertices[0].getZ() +
+                     beta * m_vertices[1].getZ() +
+                     gamma * m_vertices[2].getZ();
     values[0] = alpha;
     values[1] = beta;
     values[2] = gamma;
