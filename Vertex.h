@@ -40,8 +40,6 @@ public:
     double getY() const;
     double getZ() const;
 
-    void setCoef (double coef);
-    double getCoef() const;
 
     void setColor (TGAColor color);
     TGAColor getColor();
@@ -54,9 +52,6 @@ public:
 
     void resize(const int width, const int height);
 
-    void normalize(){
-        
-    }
 };
 
 

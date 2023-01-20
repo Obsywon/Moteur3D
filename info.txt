@@ -64,3 +64,12 @@ gamma = aire (PAB) / arie (ABC)
 
 
 
+vt : sommet de texture
+avec coordonnées u et v à remettre sur les faces 
+correspond aux f :
+(a/b/c, a/b/c, a/b/c)
+le a correspond à l'indice d'un nuage V 
+les b correspondent aux indices d'un nuage vt (+1)
+(entre 0 et 1, à remettre à la taille de l'image)
+Interpolation des coordonnées U,V pour récupérer la couleur dans la texture 
+(u, v) = alpa . (u1; v1) + beta (u2, v2) + gamma (u3, v3)

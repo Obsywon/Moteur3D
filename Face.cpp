@@ -13,51 +13,57 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
              << face.m_vertices.at(1) << ", " << face.m_vertices.at(2) << ") " << std::endl;
 }
 
-
-void Face::draw_triangle(TGAImage &img, TGAColor color)
+void Face::draw_triangle(TGAImage &img, TGAColor color, double *z_buffer)
 {
     std::array<int, 4> box = load_bounding_box();
+    std::array<double, 4> baryocentric = {0};
     vecteur light = {0, 0, -1};
     double intensity;
-    
+    int indice;
 
     // Remplir le reectangle
     for (int x = box[0]; x <= box[2]; x++)
     {
         for (int y = box[1]; y <= box[3]; y++)
         {
-            if (check_pixel_in_triangle(x, y))
+            baryocentric = baryocentric_values(x, y);
+            indice = int(x + y * WIDTH);
+
+            if (baryocentric[0] > -0.01 && baryocentric[1] > -0.01 && baryocentric[2] > -0.01)
             {
-                intensity = color_intensity(light);
-                if (intensity > 0){
+
+                if (z_buffer[indice] < baryocentric[3])
+                {
+                    z_buffer[indice] = baryocentric[3];
+                    intensity = color_intensity(light);
                     img.set(x, y, TGAColor(255 * intensity, 255 * intensity, 255 * intensity, 255 * intensity));
+                    
                 }
             }
         }
     }
 }
 
-double Face::color_intensity(const vecteur& light){
+double Face::color_intensity(const vecteur &light)
+{
 
-    vecteur v01 = {  
-        m_vertices[1].getX() - m_vertices[0].getX(), 
-        m_vertices[1].getY() - m_vertices[0].getY(), 
-        m_vertices[1].getZ() - m_vertices[0].getZ()
-    };
+    vecteur v01 = {
+        m_vertices[1].getX() - m_vertices[0].getX(),
+        m_vertices[1].getY() - m_vertices[0].getY(),
+        m_vertices[1].getZ() - m_vertices[0].getZ()};
 
-    vecteur v02 = {  
-        m_vertices[2].getX() - m_vertices[0].getX(), 
-        m_vertices[2].getY() - m_vertices[0].getY(), 
-        m_vertices[2].getZ() - m_vertices[0].getZ()
-    };
+    vecteur v02 = {
+        m_vertices[2].getX() - m_vertices[0].getX(),
+        m_vertices[2].getY() - m_vertices[0].getY(),
+        m_vertices[2].getZ() - m_vertices[0].getZ()};
     vecteur normal = {
         v01.y * v02.z - v01.z * v02.y,
         v01.z * v02.x - v01.x * v02.z,
         v01.x * v02.y - v01.y * v02.x,
     };
 
-    double longueur = std::sqrt((normal.x * normal.x) + 
-                    (normal.y * normal.y) + (normal.z * normal.z));
+    double longueur = std::sqrt((normal.x * normal.x) +
+                                (normal.y * normal.y) + (normal.z * normal.z));
 
     normal.x /= longueur;
     normal.y /= longueur;
@@ -111,8 +117,10 @@ std::array<int, 4> Face::load_bounding_box() const
     return array;
 }
 
-bool Face::check_pixel_in_triangle(const int x, const int y)
+std::array<double, 4> Face::baryocentric_values(const int x, const int y) const
 {
+    std::array<double, 4> values = {0};
+
     int area1 = calculate_area(m_vertices[0], m_vertices[1], x, y);
     int area2 = calculate_area(m_vertices[1], m_vertices[2], x, y);
     int area3 = calculate_area(m_vertices[2], m_vertices[0], x, y);
@@ -121,11 +129,15 @@ bool Face::check_pixel_in_triangle(const int x, const int y)
     double beta = (double)area3 / (double)m_fullArea;
     double gamma = (double)area1 / (double)m_fullArea;
 
-    m_vertices.at(1).setCoef(alpha);
-    m_vertices.at(2).setCoef(beta);
-    m_vertices.at(0).setCoef(gamma);
-    
-    return alpha > -0.01 && beta > -0.01 && gamma > -0.01;
+    double baryo_z = alpha * m_vertices[1].getZ() +
+                     beta * m_vertices[2].getZ() +
+                     gamma * m_vertices[0].getZ();
+    values[0] = alpha;
+    values[1] = beta;
+    values[2] = gamma;
+    values[3] = baryo_z;
+
+    return values;
 }
 
 int Face::calculate_area(const Vertex &v1, const Vertex &v2, const Vertex &v3) const

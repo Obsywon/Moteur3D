@@ -9,6 +9,8 @@
 #include <random>
 #include "Vertex.h"
 
+constexpr int HEIGHT {1000};
+constexpr int WIDTH {1000};
 
 struct vecteur {
     double x;
@@ -39,13 +41,7 @@ public:
     /**
      * Dessine un triangle rempli
     */
-    void draw_triangle(TGAImage &img, TGAColor color);
-
-
-    /**
-     * Vérifie si le pixel se situe dans le triangle
-    */
-    bool check_pixel_in_triangle(const int x, const int y);
+    void draw_triangle(TGAImage &img, TGAColor color, double* z_buffer);
 
 
     int calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;
@@ -54,6 +50,10 @@ public:
     int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
 
     double color_intensity(const vecteur& light);
+
+    void adapt_color (const int x, const int y, TGAImage &img, TGAColor &color, double intensity);
+
+    std::array<double, 4> baryocentric_values (const int x, const int y) const;
 };
 
 #endif //__FACE_H__

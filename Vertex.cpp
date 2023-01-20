@@ -43,14 +43,6 @@ double Vertex::getZ() const {
     return m_oz;
 }
 
-void Vertex::setCoef (double coef){
-    m_coef = coef;
-}
-
-double Vertex::getCoef() const {
-    return m_coef;
-}
-
 void Vertex::setColor (TGAColor color){
     m_color = color;
 }
@@ -81,6 +73,8 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
             img.set(x, y, color); 
         } 
     }  
+
+
 }
 
 void Vertex::draw_line (const Vertex &end, TGAImage &img, TGAColor color) const{
