@@ -25,6 +25,7 @@ public:
     std::vector<double>& operator[](const int i);
     Matrix operator*(const Matrix& other);
     Matrix identify(const int dimension);
+    vecteur matrixToVector();
 };
 
 

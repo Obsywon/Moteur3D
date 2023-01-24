@@ -17,8 +17,8 @@ Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<st
 
 Matrix::Matrix(const Vertex& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
 {
-    m_matrix[0][0] = v.getX();
-    m_matrix[0][1] = v.getY();
+    m_matrix[0][0] = v.roundX();
+    m_matrix[0][1] = v.roundY();
     m_matrix[0][2] = v.getZ();
     m_matrix[0][3] = 1.f;
 }
@@ -39,6 +39,7 @@ int Matrix::getNbCols() const {
 int Matrix::getNbRows() const {
     return m_rows;
 }
+
 Matrix Matrix::identify(const int dimension){
     Matrix temp (dimension, dimension);
 
@@ -52,6 +53,15 @@ Matrix Matrix::identify(const int dimension){
         }
     }
     return temp;
+}
+
+vecteur Matrix::matrixToVector(){
+    vecteur v;
+    double z = m_matrix[3][0];
+    v.x = m_matrix[0][0] / z;
+    v.y = m_matrix[0][1] / z;
+    v.z = m_matrix[0][2] / z;
+    return v;
 }
 
 Matrix Matrix::operator*(const Matrix& other) {
@@ -71,4 +81,6 @@ Matrix Matrix::operator*(const Matrix& other) {
     }
     return temp;
 }
+
+
 
