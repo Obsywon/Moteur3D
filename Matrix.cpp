@@ -7,6 +7,22 @@ m_rows{h}, m_cols{w}, m_matrix{std::vector<std::vector<double>> (w, std::vector<
 
 }
 
+Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
+{
+    m_matrix[0][0] = v.x;
+    m_matrix[0][1] = v.y;
+    m_matrix[0][2] = v.z;
+    m_matrix[0][3] = 1.f;
+}
+
+Matrix::Matrix(const Vertex& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
+{
+    m_matrix[0][0] = v.getX();
+    m_matrix[0][1] = v.getY();
+    m_matrix[0][2] = v.getZ();
+    m_matrix[0][3] = 1.f;
+}
+
 Matrix::~Matrix()
 {
 }
@@ -33,7 +49,6 @@ Matrix Matrix::identify(const int dimension){
             }else{
                 temp[i][j] = 0.f;
             }
-
         }
     }
     return temp;
@@ -56,3 +71,4 @@ Matrix Matrix::operator*(const Matrix& other) {
     }
     return temp;
 }
+

@@ -23,6 +23,7 @@ int main(int argc, char** argv) {
     texture.read_tga_file("./obj/african_head/african_head_diffuse.tga");
     texture.flip_vertically();
 
+    
     Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
 
     std::vector <Face> faces = parser.getFaces();

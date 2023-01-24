@@ -4,9 +4,15 @@
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "tgaimage.h"
 
 
+struct vecteur {
+    double x;
+    double y;
+    double z;
+};
 
 class Vertex
 {

@@ -3,7 +3,6 @@
 
 
 #include <iostream>
-#include <vector>
 #include <climits>
 #include <array>
 #include <random>
@@ -13,11 +12,7 @@
 constexpr int HEIGHT {1000};
 constexpr int WIDTH {1000};
 
-struct vecteur {
-    double x;
-    double y;
-    double z;
-};
+
 
 
 class Face
@@ -51,7 +46,7 @@ public:
 
     int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
 
-    double color_intensity(const vecteur& light);
+    double color_intensity(const vecteur& light_source);
 
     void adapt_color (const int x, const int y, TGAImage &img, TGAColor &color, double intensity);
 

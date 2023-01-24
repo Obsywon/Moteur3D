@@ -1,7 +1,7 @@
 #ifndef __MATRIX_H__
 #define __MATRIX_H__
 
-#include "Face.h"
+#include "Vertex.h"
 #include <cassert>
 
 
@@ -16,7 +16,9 @@ private:
 
     
 public:
-    Matrix(const int h = SIZE, const int w = SIZE);
+    explicit Matrix(const int h = SIZE, const int w = SIZE);
+    Matrix(const vecteur& v);
+    Matrix(const Vertex& v);
     ~Matrix();
     int getNbCols() const;
     int getNbRows() const;

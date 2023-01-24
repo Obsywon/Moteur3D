@@ -17,7 +17,7 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
 {
     std::array<int, 4> box = load_bounding_box();
     std::array<double, 4> baryo = {0};
-    vecteur light = {0, 0, -1};
+    vecteur light_source = {0, 0, -1};
     double intensity;
     int indice, x_texture, y_texture;
     TGAColor color;
@@ -48,7 +48,7 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
                     color = texture.get(x_texture, y_texture);
 
                     // Intensité lumineuse
-                    intensity = color_intensity(light);
+                    intensity = color_intensity(light_source);
                     if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a * intensity));
                 
                 }
@@ -57,7 +57,7 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
     }
 }
 
-double Face::color_intensity(const vecteur &light)
+double Face::color_intensity(const vecteur &light_source)
 {
 
     vecteur v01 = {
@@ -82,7 +82,7 @@ double Face::color_intensity(const vecteur &light)
     normal.y /= longueur;
     normal.z /= longueur;
 
-    double intensity = -((light.x * normal.x) + (light.y * normal.y) + (light.z * normal.z));
+    double intensity = -((light_source.x * normal.x) + (light_source.y * normal.y) + (light_source.z * normal.z));
     return intensity;
 }
 
