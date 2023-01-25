@@ -9,16 +9,16 @@ m_rows{h}, m_cols{w}, m_matrix{std::vector<std::vector<double>> (w, std::vector<
 
 Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
 {
-    m_matrix[0][0] = v.x;
-    m_matrix[0][1] = v.y;
-    m_matrix[0][2] = v.z;
+    m_matrix[0][0] = double(v.x);
+    m_matrix[0][1] = double(v.y);
+    m_matrix[0][2] = double(v.z);
     m_matrix[0][3] = 1.f;
 }
 
 Matrix::Matrix(const Vertex& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
 {
-    m_matrix[0][0] = v.roundX();
-    m_matrix[0][1] = v.roundY();
+    m_matrix[0][0] = v.getX();
+    m_matrix[0][1] = v.getY();
     m_matrix[0][2] = v.getZ();
     m_matrix[0][3] = 1.f;
 }
@@ -57,7 +57,11 @@ Matrix Matrix::identify(const int dimension){
 
 vecteur Matrix::matrixToVector(){
     vecteur v;
+    //double z = (1 - m_matrix[2][0])/ double(1.3);
     double z = m_matrix[3][0];
+
+    //std::cout << m_matrix[0][1] / z << std::endl;
+
     v.x = m_matrix[0][0] / z;
     v.y = m_matrix[0][1] / z;
     v.z = m_matrix[0][2] / z;
@@ -82,5 +86,13 @@ Matrix Matrix::operator*(const Matrix& other) {
     return temp;
 }
 
-
-
+std::ostream& operator<<(std::ostream& s, Matrix& m) {
+    for (int i=0; i<m.getNbRows(); i++)  {
+        for (int j=0; j<m.getNbCols(); j++) {
+            s << m[i][j];
+            if (j<m.getNbCols()-1) s << "\t";
+        }
+        s << "\n";
+    }
+    return s;
+}

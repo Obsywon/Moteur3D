@@ -1,9 +1,6 @@
 #include "Vertex.h"
 
 Vertex::Vertex(const double x, const double y, const double z): m_x{x}, m_y{y}, m_z{z} {
-        m_ox = x;
-        m_oy = y;
-        m_oz = z;
 }
 
 Vertex::~Vertex(){}
@@ -30,18 +27,28 @@ int Vertex::roundZ() const{
 }
 
 double Vertex::getX() const {
-    return m_ox;
+    return m_x;
 }
 
 double Vertex::getY() const {
-    return m_oy;
+    return m_y;
 }
 
 
 double Vertex::getZ() const {
-    return m_oz;
+    return m_z;
 }
 
+
+void Vertex::setX(double x){
+    m_x = x;
+}
+void Vertex::setY(double y){
+    m_y = y;
+}
+void Vertex::setZ(double z){
+    m_z = z;
+}
 
 
 void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const {

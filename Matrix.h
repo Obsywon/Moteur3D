@@ -13,6 +13,7 @@ private:
     int m_rows;
     int m_cols;
     std::vector<std::vector<double> > m_matrix;
+    friend std::ostream& operator<<(std::ostream& s, Matrix& m);
 
     
 public:
@@ -26,6 +27,7 @@ public:
     Matrix operator*(const Matrix& other);
     Matrix identify(const int dimension);
     vecteur matrixToVector();
+
 };
 
 

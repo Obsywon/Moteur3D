@@ -21,10 +21,6 @@ private:
     double m_y;
     double m_z;
 
-    double m_ox;
-    double m_oy;
-    double m_oz;    
-
     friend std::ostream& operator <<(std::ostream &s, const Vertex& vertex);
     friend bool operator== (Vertex &s, Vertex &t);
 
@@ -42,6 +38,10 @@ public:
     double getX() const;
     double getY() const;
     double getZ() const;
+
+    void setX(double x);
+    void setY(double y);
+    void setZ(double z);
 
 
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;

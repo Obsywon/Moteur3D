@@ -30,14 +30,16 @@ int main(int argc, char** argv) {
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
 
+    const double dist_z = double(150);
 
     for (Face &face: faces){
+        face.project(dist_z);
         face.draw_triangle(image, z_buffer, texture);
         //face.draw_line_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
-	image.write_tga_file("output.tga");
+	image.write_tga_file("output2.tga");
 
 	return 0;
 }

@@ -6,8 +6,8 @@
 #include <climits>
 #include <array>
 #include <random>
-#include "Vertex.h"
 #include "Texture.h"
+#include "Matrix.h"
 
 constexpr int HEIGHT {1000};
 constexpr int WIDTH {1000};
@@ -34,6 +34,9 @@ public:
      * Dessine les segments du triangle
     */
     void draw_line_triangle(TGAImage &img, TGAColor color) const;
+
+    void project(const double distance_z);
+
 
     /**
      * Dessine un triangle rempli
