@@ -43,6 +43,7 @@ public:
     void setY(double y);
     void setZ(double z);
 
+    void project(const double distance_z);
 
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;
 

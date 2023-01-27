@@ -13,37 +13,6 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
              << face.m_vertices.at(1) << ", " << face.m_vertices.at(2) << ") " << std::endl;
 }
 
-
-void Face::project(const double distance_z)
-{
-    vecteur vect;
-    Matrix matrix, identity;
-    identity = matrix.identify(4);
-    identity[3][2] = -1/(double) distance_z;
-    
-
-    for (Vertex &v : m_vertices){
-        
-        matrix = Matrix(4, 1);
-        matrix[0][0] = v.getX();
-        matrix[0][1] = v.getY();
-        matrix[0][2] = v.getZ();
-        matrix[0][3] = double(1);
-
-        //std::cout << matrix << std::endl;
-
-
-        matrix = identity * matrix;
-        //std::cout << matrix[0][3] << std::endl;
-        vect = matrix.matrixToVector();
-        std::cout << vect.x << " " << vect.y << " " << vect.z << std::endl;
-        v.setX(vect.x);
-        v.setY(vect.y);
-        v.setZ(vect.z);
-    }
-    
-}
-
 void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
 {
     std::array<int, 4> box = load_bounding_box();
@@ -54,24 +23,13 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
     TGAColor color;
 
 
-    
-    /* Matrix matrix, identity;
-    vecteur vect;
-    identity = matrix.identify(4);
-    identity[3][2] = -1/1.3f;
-    std::cout << -1/double(1.3)<< std::endl; */
-
-
-
-
-
     // Remplir le reectangle
     for (int x = box[0]; x <= box[2]; x++)
     {
         for (int y = box[1]; y <= box[3]; y++)
         {
 
-
+            if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT ) continue;
 
             baryo = baryocentric_values(x, y);
             indice = int(x + y * WIDTH);
@@ -95,27 +53,6 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
                     
                     color = texture.get(x_texture, y_texture);
 
-                                        
-                    /* vect.x = x;
-                    vect.y = y;
-                    vect.z = baryo[3];
-                    
-                    matrix = Matrix(4, 1);
-                    matrix[0][0] = double(x);
-                    matrix[0][1] = double(y);
-                    matrix[0][2] = baryo[3];
-                    matrix[0][3] = double(1);
-
-                    //std::cout << matrix << std::endl;
-
-
-                    matrix = identity * matrix;
-                    std::cout << matrix[0][3] << std::endl;
-                    vect = matrix.matrixToVector();
- */
-                    //std::cout << vect.x << " " << x << " " << vect.y << " " << y << std::endl;
-                    
-                    
 
                     // Intensité lumineuse
                     intensity = color_intensity(light_source);

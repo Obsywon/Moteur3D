@@ -16,6 +16,9 @@ std::default_random_engine &engine){
 
 int main(int argc, char** argv) {
 
+    const double dist_z = 3.;
+
+
     double *z_buffer = new double[WIDTH*HEIGHT];
     for (int i=WIDTH*HEIGHT; i--; z_buffer[i] = -std::numeric_limits<double>::max());
 
@@ -24,22 +27,20 @@ int main(int argc, char** argv) {
     texture.flip_vertically();
 
     
-    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
+    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture, dist_z);
 
     std::vector <Face> faces = parser.getFaces();
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
 
-    const double dist_z = double(150);
 
     for (Face &face: faces){
-        face.project(dist_z);
         face.draw_triangle(image, z_buffer, texture);
         //face.draw_line_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
-	image.write_tga_file("output2.tga");
+	image.write_tga_file("output.tga");
 
 	return 0;
 }

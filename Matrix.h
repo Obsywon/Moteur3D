@@ -17,7 +17,7 @@ private:
 
     
 public:
-    explicit Matrix(const int h = SIZE, const int w = SIZE);
+    explicit Matrix(const int rows = SIZE, const int cols = SIZE);
     Matrix(const vecteur& v);
     Matrix(const Vertex& v);
     ~Matrix();

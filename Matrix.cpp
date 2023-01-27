@@ -1,13 +1,13 @@
 #include "Matrix.h"
 
 
-Matrix::Matrix(const int h, const int w): 
-m_rows{h}, m_cols{w}, m_matrix{std::vector<std::vector<double>> (w, std::vector<double>(h, 0))}
+Matrix::Matrix(const int rows, const int cols): 
+m_rows{rows}, m_cols{cols}, m_matrix{std::vector<std::vector<double>> (rows, std::vector<double>(cols, 0))}
 {
 
 }
 
-Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
+Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (m_rows, std::vector<double>(m_cols, 0.))}
 {
     m_matrix[0][0] = double(v.x);
     m_matrix[0][1] = double(v.y);
@@ -15,7 +15,7 @@ Matrix::Matrix(const vecteur& v) : m_rows(4), m_cols(1), m_matrix{std::vector<st
     m_matrix[0][3] = 1.f;
 }
 
-Matrix::Matrix(const Vertex& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0))}
+Matrix::Matrix(const Vertex& v) : m_rows(4), m_cols(1), m_matrix{std::vector<std::vector<double>> (4, std::vector<double>(1, 0.))}
 {
     m_matrix[0][0] = v.getX();
     m_matrix[0][1] = v.getY();
@@ -63,8 +63,8 @@ vecteur Matrix::matrixToVector(){
     //std::cout << m_matrix[0][1] / z << std::endl;
 
     v.x = m_matrix[0][0] / z;
-    v.y = m_matrix[0][1] / z;
-    v.z = m_matrix[0][2] / z;
+    v.y = m_matrix[1][0] / z;
+    v.z = m_matrix[2][0] / z;
     return v;
 }
 

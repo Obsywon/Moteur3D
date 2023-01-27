@@ -27,12 +27,12 @@ private:
 
     void parseLine (const std::string &line, std::vector <std::string> &words);
     std::array <int,3> parsePartFace (std::string &word);
-    void buildVertexes(std::vector <std::string> &words, const int width, const int height);
+    void buildVertexes(std::vector <std::string> &words, const int width, const int height, const double c);
     void buildFaces (std::vector <std::string> &words);
     
 public:
     
-    Parser(const std::string& path, const int width, const int height, TGAImage& texture);
+    Parser(const std::string& path, const int width, const int height, TGAImage& texture, const double z_dist);
     ~Parser();
     std::vector <Vertex> getVertexes ();
     std::vector <Face> getFaces ();

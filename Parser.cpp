@@ -1,11 +1,10 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture):
+Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture, const double c):
 m_texture{texture}
 {
     // Initialisation des structures:
     std::vector<std::string> words;
-
 
     // Lecture et enregistrement de chaque ligne du fichier dans le vector
     std::ifstream file(path);
@@ -19,7 +18,7 @@ m_texture{texture}
                 continue;
             
             parseLine(current_line, words);
-            buildVertexes(words, width, height);
+            buildVertexes(words, width, height, c);
             buildFaces(words);
         }
 
@@ -76,11 +75,10 @@ std::array<int, 3> Parser::parsePartFace(std::string &word)
     return array;
 }
 
-void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height)
+void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height, const double c)
 {
     // Contient les vertices finales
     double x, y, z; 
-
     // Création des vertices
     if (words.size() < 4)
     {
@@ -92,6 +90,7 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(2));
         z = std::stod(words.at(3));
         Vertex vertex = Vertex(x, y, z);
+        vertex.project(c);
         vertex.resize(width, height);
         m_vertices.push_back(vertex);
     }
@@ -102,6 +101,31 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         texture.resize(m_texture.get_width(), m_texture.get_height());
         m_textures.push_back(texture);
     }
+}
+
+void Vertex::project(const double distance_z)
+{
+    vecteur vect;
+    Matrix matrix, identity;
+    identity = matrix.identify(4);
+    identity[3][2] = -1/distance_z;
+        matrix = Matrix(4, 1);
+        matrix[0][0] = getX();
+        matrix[1][0] = getY();
+        matrix[2][0] = getZ();
+        matrix[3][0] = double(1);
+
+        //std::cout << matrix << std::endl;
+
+
+        matrix = identity * matrix;
+        //std::cout << matrix << std::endl;
+        vect = matrix.matrixToVector();
+        //std::cout << vect.x << " " << vect.y << " " << vect.z << std::endl;
+
+        setX(vect.x);
+        setY(vect.y);
+        setZ(vect.z);
 }
 
 
