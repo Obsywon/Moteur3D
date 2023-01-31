@@ -38,6 +38,8 @@ public:
     std::vector <Face> getFaces ();
 
     const TGAColor randomize_color();
+    void project(Vertex &v, const double distance_z);
+
 
 };
 

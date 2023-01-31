@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/renderer.dir/main.cpp.o -o renderer 

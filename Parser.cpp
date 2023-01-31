@@ -90,7 +90,7 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(2));
         z = std::stod(words.at(3));
         Vertex vertex = Vertex(x, y, z);
-        vertex.project(c);
+        project(vertex, c);
         vertex.resize(width, height);
         m_vertices.push_back(vertex);
     }
@@ -103,29 +103,22 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
     }
 }
 
-void Vertex::project(const double distance_z)
+void Parser::project(Vertex &v, const double distance_z)
 {
     vecteur vect;
     Matrix matrix, identity;
     identity = matrix.identify(4);
     identity[3][2] = -1/distance_z;
-        matrix = Matrix(4, 1);
-        matrix[0][0] = getX();
-        matrix[1][0] = getY();
-        matrix[2][0] = getZ();
-        matrix[3][0] = double(1);
-
-        //std::cout << matrix << std::endl;
-
-
-        matrix = identity * matrix;
-        //std::cout << matrix << std::endl;
-        vect = matrix.matrixToVector();
-        //std::cout << vect.x << " " << vect.y << " " << vect.z << std::endl;
-
-        setX(vect.x);
-        setY(vect.y);
-        setZ(vect.z);
+    matrix = Matrix(4, 1);
+    matrix[0][0] = v.getX();
+    matrix[1][0] = v.getY();
+    matrix[2][0] = v.getZ();
+    matrix[3][0] = double(1);
+    matrix = identity * matrix;
+    vect = matrix.matrixToVector();
+    v.setX(vect.x);
+    v.setY(vect.y);
+    v.setZ(vect.z);
 }
 
 

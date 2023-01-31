@@ -23,7 +23,7 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
     TGAColor color;
 
 
-    // Remplir le reectangle
+    // Remplir le rectangle
     for (int x = box[0]; x <= box[2]; x++)
     {
         for (int y = box[1]; y <= box[3]; y++)

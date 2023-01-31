@@ -1,7 +1,37 @@
 [
 {
   "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/renderer.dir/main.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/main.cpp",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Face.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Face.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Face.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Matrix.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Matrix.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Matrix.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Parser.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Texture.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Texture.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Texture.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Vertex.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Vertex.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Vertex.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/main.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/main.cpp",
   "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/main.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/tgaimage.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/tgaimage.cpp"
 }
 ]

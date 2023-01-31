@@ -57,11 +57,7 @@ Matrix Matrix::identify(const int dimension){
 
 vecteur Matrix::matrixToVector(){
     vecteur v;
-    //double z = (1 - m_matrix[2][0])/ double(1.3);
     double z = m_matrix[3][0];
-
-    //std::cout << m_matrix[0][1] / z << std::endl;
-
     v.x = m_matrix[0][0] / z;
     v.y = m_matrix[1][0] / z;
     v.z = m_matrix[2][0] / z;
