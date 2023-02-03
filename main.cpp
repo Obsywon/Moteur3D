@@ -16,7 +16,7 @@ std::default_random_engine &engine){
 
 int main(int argc, char** argv) {
 
-    const double dist_z = 3.;
+    const double dist_z = 4.;
 
 
     double *z_buffer = new double[WIDTH*HEIGHT];
