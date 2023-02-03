@@ -1,6 +1,8 @@
 #include "Parser.h"
 
-Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture, const double c):
+const int DEPTH {255};
+
+Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture):
 m_texture{texture}
 {
     // Initialisation des structures:
@@ -18,7 +20,7 @@ m_texture{texture}
                 continue;
             
             parseLine(current_line, words);
-            buildVertexes(words, width, height, c);
+            buildVertexes(words, width, height);
             buildFaces(words);
         }
 
@@ -75,7 +77,7 @@ std::array<int, 3> Parser::parsePartFace(std::string &word)
     return array;
 }
 
-void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height, const double c)
+void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height)
 {
     // Contient les vertices finales
     double x, y, z; 
@@ -90,7 +92,6 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(2));
         z = std::stod(words.at(3));
         Vertex vertex = Vertex(x, y, z);
-        project(vertex, c);
         vertex.resize(width, height);
         m_vertices.push_back(vertex);
     }
@@ -101,25 +102,91 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         texture.resize(m_texture.get_width(), m_texture.get_height());
         m_textures.push_back(texture);
     }
+    if (words.at(0).compare("vn") == 0){
+        x = std::stod(words.at(2));
+        y = std::stod(words.at(3));
+        z = std::stod(words.at(4));
+        NormalVector normal = NormalVector(x, y, z);
+        //vertex.resize(width, height);
+        m_normals.push_back(normal);
+    }
 }
 
-void Parser::project(Vertex &v, const double distance_z)
+void Parser::project(const double distance_z)
 {
-    vecteur vect;
+    Vecteur vect;
     Matrix matrix, identity;
     identity = matrix.identify(4);
-    identity[3][2] = -1/distance_z;
-    matrix = Matrix(4, 1);
-    matrix[0][0] = v.getX();
-    matrix[1][0] = v.getY();
-    matrix[2][0] = v.getZ();
-    matrix[3][0] = double(1);
-    matrix = identity * matrix;
-    vect = matrix.matrixToVector();
-    v.setX(vect.x);
-    v.setY(vect.y);
-    v.setZ(vect.z);
+
+    for (Vertex &v : m_vertices){
+        identity[3][2] = -1/distance_z;
+        matrix = Matrix(4, 1);
+        matrix[0][0] = v.getX();
+        matrix[1][0] = v.getY();
+        matrix[2][0] = v.getZ();
+        matrix[3][0] = double(1);
+        matrix = identity * matrix;
+        vect = matrix.matrixToVector();
+        v.setX(vect.x);
+        v.setY(vect.y);
+        v.setZ(vect.z);
+    }
 }
+
+void Parser::transform(){
+    for (Vertex &v : m_vertices){
+        
+    }
+
+}
+
+void Parser::generateModelview (Vecteur pov, Vecteur center, Vecteur haut){
+    Vecteur diff_pov_center= {pov.x - center.x, pov.y - center.y, pov.z - center.z};
+
+    Vecteur z = normalize(diff_pov_center);
+    Vecteur x = normalize(produitCroix(haut, z));
+    Vecteur y = normalize(produitCroix(z, x));
+
+    Matrix Minv, t, modelview; 
+    Minv = Matrix::identify(4);
+    t = Matrix::identify(4);
+
+
+    for (int i = 0; i < 3; i++){
+        Minv[0][i] = x[i];
+        Minv[1][i] = y[i];
+        Minv[2][i] = z[i];
+        t[0][3] = -center[i];
+    }
+
+    modelview = Minv * t;
+    m_modelview = modelview;
+
+}
+
+void Parser::generateViewport (int x, int y, int w, int h){
+    Matrix viewport = Matrix::identify(4);
+    viewport[0][3] = x+w/2.;
+    viewport[1][3] = y+h/2.;
+    viewport[2][3] = DEPTH/2.;
+
+    viewport[0][0] = w/2.;
+    viewport[1][1] = h/2.;
+    viewport[2][2] = DEPTH/2.;
+
+    m_viewport = viewport;
+}
+
+void Parser::generateProjection (Vecteur pov, Vecteur center){
+    Matrix proj = Matrix::identify(4);
+    Vecteur diff_pov_center= {pov.x - center.x, pov.y - center.y, pov.z - center.z};
+    double n = diff_pov_center.x * diff_pov_center.x + diff_pov_center.y * diff_pov_center.y + diff_pov_center.z * diff_pov_center.z;
+    n = sqrt(n);
+
+    proj[3][2] = -1. / n;
+    m_projection = proj;
+}
+
 
 
 
@@ -127,6 +194,8 @@ void Parser::buildFaces(std::vector<std::string> &words)
 {
     std::vector<Vertex> local_vertices;
     std::vector<Texture> local_textures;
+    std::vector<NormalVector> local_normals;
+
     std::array<int, 3> f1, f2, f3;
 
     // Création des faces
@@ -147,7 +216,11 @@ void Parser::buildFaces(std::vector<std::string> &words)
     local_textures.push_back(m_textures.at(f1[1] - 1));
     local_textures.push_back(m_textures.at(f2[1] - 1));
     local_textures.push_back(m_textures.at(f3[1] - 1));
-    
-    Face face = Face(local_vertices, local_textures);
+
+    local_normals.push_back(m_normals.at(f1[2] - 1));
+    local_normals.push_back(m_normals.at(f2[2] - 1));
+    local_normals.push_back(m_normals.at(f3[2] - 1));
+
+    Face face = Face(local_vertices, local_textures, local_normals);
     m_faces.push_back(face);
 }

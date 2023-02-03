@@ -7,15 +7,40 @@
 #include <vector>
 #include "tgaimage.h"
 
-struct vecteur {
+struct Vecteur {
     double x;
     double y;
     double z;
 };
 
+Vecteur normalize(Vecteur & vecteur){
+    double n = vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z;
+    Vecteur v;
+    v.x = vecteur.x;
+    v.y = vecteur.y;
+    v.z = vecteur.z;
+
+    v.x *= (1/n);
+    v.y *= (1/n);
+    v.z *= (1/n);
+
+    return v;
+}
+
+Vecteur produitCroix (Vecteur& v1, Vecteur & v2){
+    Vecteur v;
+    v.x = v1.y*v2.z - v1.z*v2.y;
+    v.y = v1.z*v2.x - v1.x*v2.z;
+    v.z = v1.x*v2.y - v1.y*v2.x;
+    return v;
+}
+
+
+
+
 class Vertex
 {
-private:
+protected:
     double m_x;
     double m_y;
     double m_z;
@@ -51,6 +76,16 @@ public:
     void resize(const int width, const int height);
 
 };
+
+class NormalVector : Vertex
+{
+private:
+    /* data */
+public:
+    NormalVector(const double x, const double y, const double z);
+    ~NormalVector();
+};
+
 
 
 

@@ -20,6 +20,7 @@ class Face
 private:
     std::vector<Vertex> m_vertices;
     std::vector<Texture> m_textures;
+    std::vector<NormalVector> m_normals;
     int m_fullArea;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
@@ -27,7 +28,7 @@ private:
 
 
 public:
-    Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures);
+    Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures, std::vector<NormalVector> &normals);
     ~Face();
 
     /**
@@ -49,7 +50,7 @@ public:
 
     int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
 
-    double color_intensity(const vecteur& light_source);
+    double color_intensity(const Vecteur& light_source);
 
     void adapt_color (const int x, const int y, TGAImage &img, TGAColor &color, double intensity);
 

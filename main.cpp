@@ -2,21 +2,16 @@
 
 
 
-const TGAColor white = TGAColor (255, 255, 255, 255);
-const TGAColor red   = TGAColor (255, 0,   0,   255);
-const TGAColor green   = TGAColor(0, 255,   0,   255);
-const TGAColor blue   = TGAColor(0, 0,   255,   255);
-
-
-const TGAColor randomize_color (std::uniform_int_distribution<int> &distr, 
-std::default_random_engine &engine){
-    return TGAColor(distr(engine), distr(engine), distr(engine), 255);
-}
 
 
 int main(int argc, char** argv) {
 
-    const double dist_z = 4.;
+    const double dist_z = 10.;
+    const Vecteur eyeCenter = {1., 1., 3.};
+    const Vecteur center = {0., 0., 0.};
+    const Vecteur haut = {0., 1., 0.};
+
+
 
 
     double *z_buffer = new double[WIDTH*HEIGHT];
@@ -27,8 +22,16 @@ int main(int argc, char** argv) {
     texture.flip_vertically();
 
     
-    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture, dist_z);
+    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
+    parser.project(dist_z);
 
+
+
+    parser.generateModelview(eyeCenter, center, haut);
+    parser.generateViewport(WIDTH/8, HEIGHT/8, WIDTH*3/4, HEIGHT*3/4);
+    parser.generateProjection(eyeCenter, center);
+
+    
     std::vector <Face> faces = parser.getFaces();
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
@@ -36,7 +39,6 @@ int main(int argc, char** argv) {
 
     for (Face &face: faces){
         face.draw_triangle(image, z_buffer, texture);
-        //face.draw_line_triangle(image, green);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image

@@ -18,7 +18,7 @@ private:
     
 public:
     explicit Matrix(const int rows = SIZE, const int cols = SIZE);
-    Matrix(const vecteur& v);
+    Matrix(const Vecteur v);
     Matrix(const Vertex& v);
     ~Matrix();
     int getNbCols() const;
@@ -26,7 +26,9 @@ public:
     std::vector<double>& operator[](const int i);
     Matrix operator*(const Matrix& other);
     Matrix identify(const int dimension);
-    vecteur matrixToVector();
+    Matrix inverse();
+    Matrix transpose();
+    Vecteur matrixToVector();
 
 };
 

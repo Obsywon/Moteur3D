@@ -45,7 +45,8 @@
         "random": "cpp",
         "tuple": "cpp",
         "fstream": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "complex": "cpp"
     },
     "cmake.configureOnOpen": false
 }
