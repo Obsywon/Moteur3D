@@ -54,7 +54,7 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
                                     baryo[2] * m_textures[2].getRoundY();
                     
                     color = texture.get(x_texture, y_texture);
-
+                    color = TGAColor(255, 0, 0, 255);
 
                     // Intensité lumineuse
                     if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a));
@@ -103,6 +103,7 @@ void Face::draw_line_triangle(TGAImage &img, TGAColor color) const
     v0.draw_line(v1, img, color);
     v0.draw_line(v2, img, color);
     v1.draw_line(v2, img, color);
+    
 }
 
 std::array<int, 4> Face::load_bounding_box() const
@@ -161,12 +162,27 @@ std::array<double, 4> Face::baryocentric_values(const int x, const int y) const
     return values;
 }
 
-int Face::calculate_area(const Vertex &v1, const Vertex &v2, const Vertex &v3) const
+double Face::calculate_area(const Vertex &v1, const Vertex &v2, const Vertex &v3) const
 {
-    return calculate_area(v1, v2, v3.roundX(), v3.roundY());
+    return calculate_area(v1, v2, v3.getX(), v3.getY());
 }
 
-int Face::calculate_area(const Vertex &v1, const Vertex &v2, int x, int y) const
+double Face::calculate_area(const Vertex &v1, const Vertex &v2, double x, double y) const
 {
-    return (v1.roundX() * (v2.roundY() - y) + v2.roundX() * (y - v1.roundY()) + x * (v1.roundY() - v2.roundY()));
+    return (v1.getX() * (v2.getY() - y) + v2.getX() * (y - v1.getY()) + x * (v1.getY() - v2.getY())) / 2.;
+}
+
+void Face::transform(Matrix &viewport, Matrix &modelview, Matrix &projection){
+    Vecteur vect;
+    Matrix temp;
+    for (Vertex& v : m_vertices){
+        if (v.hasBeenTransformed()) continue;
+        temp = Matrix(v);
+        temp = viewport * modelview * projection * temp;
+        vect = temp.matrixToVector();
+        v.setX(vect.x);
+        v.setY(vect.y);
+        v.setZ(vect.z);
+        v.setTransformed(true);
+    }
 }

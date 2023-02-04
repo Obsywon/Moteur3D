@@ -1,7 +1,7 @@
 #include "Parser.h"
+#include "Model.h"
 
-
-
+const TGAColor VERT = TGAColor(0, 255, 0, 255);
 
 
 int main(int argc, char** argv) {
@@ -23,22 +23,20 @@ int main(int argc, char** argv) {
 
     
     Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
-    parser.project(dist_z);
+    Model model = Model();
 
-
-
-    parser.generateModelview(eyeCenter, center, haut);
-    parser.generateViewport(WIDTH/8, HEIGHT/8, WIDTH*3/4, HEIGHT*3/4);
-    parser.generateProjection(eyeCenter, center);
-
-    
+    model.generateModelview(eyeCenter, center, haut);
+    model.generateViewport(WIDTH/8, HEIGHT/8, WIDTH*3/4, HEIGHT*3/4);
+    model.generateProjection(eyeCenter, center);
     std::vector <Face> faces = parser.getFaces();
 
 	TGAImage image(WIDTH, HEIGHT, TGAImage::RGB);
 
 
     for (Face &face: faces){
+        model.transform(face);
         face.draw_triangle(image, z_buffer, texture);
+        //face.draw_line_triangle(image, VERT);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image

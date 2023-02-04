@@ -11,10 +11,8 @@ struct Vecteur {
     double x;
     double y;
     double z;
-};
-
-Vecteur normalize(Vecteur & vecteur){
-    double n = vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z;
+    Vecteur static normalize(Vecteur & vecteur){
+    double n = sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
     Vecteur v;
     v.x = vecteur.x;
     v.y = vecteur.y;
@@ -25,9 +23,8 @@ Vecteur normalize(Vecteur & vecteur){
     v.z *= (1/n);
 
     return v;
-}
-
-Vecteur produitCroix (Vecteur& v1, Vecteur & v2){
+};
+Vecteur static produitCroix (Vecteur& v1, Vecteur & v2){
     Vecteur v;
     v.x = v1.y*v2.z - v1.z*v2.y;
     v.y = v1.z*v2.x - v1.x*v2.z;
@@ -35,8 +32,7 @@ Vecteur produitCroix (Vecteur& v1, Vecteur & v2){
     return v;
 }
 
-
-
+};
 
 class Vertex
 {
@@ -44,14 +40,19 @@ protected:
     double m_x;
     double m_y;
     double m_z;
+    bool m_hasBeenTransformed;
 
     friend std::ostream& operator <<(std::ostream &s, const Vertex& vertex);
     friend bool operator== (Vertex &s, Vertex &t);
 
+
+
 public:
     
-    Vertex(const double x, const double y, const double z);
+    explicit Vertex(const double x, const double y, const double z);
+    Vertex (Vecteur & v);
 
+    Vecteur toVecteur () const;
 
     ~Vertex();
 
@@ -66,6 +67,9 @@ public:
     void setX(double x);
     void setY(double y);
     void setZ(double z);
+
+    void setTransformed(bool transformed);
+    bool hasBeenTransformed();
 
 
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;

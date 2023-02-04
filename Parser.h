@@ -44,11 +44,6 @@ public:
 
     const TGAColor randomize_color();
     void project(const double distance_z);
-    void generateModelview (Vecteur pov, Vecteur center, Vecteur haut);
-    void generateViewport (int x, int y, int w, int h);
-    void generateProjection (Vecteur pov, Vecteur center);
-
-
 };
 
 

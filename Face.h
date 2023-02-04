@@ -45,16 +45,18 @@ public:
     void draw_triangle(TGAImage &img, double* z_buffer, TGAImage &texture);
 
 
-    int calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;
+    double calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;
 
 
-    int calculate_area (const Vertex &v1, const Vertex &v2, int x, int y) const;
+    double calculate_area (const Vertex &v1, const Vertex &v2, double x, double y) const;
 
     double color_intensity(const Vecteur& light_source);
 
     void adapt_color (const int x, const int y, TGAImage &img, TGAColor &color, double intensity);
 
     std::array<double, 4> baryocentric_values (const int x, const int y) const;
+
+    void transform(Matrix &viewport, Matrix &modelview, Matrix &projection);
 };
 
 #endif //__FACE_H__

@@ -1,6 +1,5 @@
 #include "Parser.h"
 
-const int DEPTH {255};
 
 Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture):
 m_texture{texture}
@@ -92,7 +91,7 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(2));
         z = std::stod(words.at(3));
         Vertex vertex = Vertex(x, y, z);
-        vertex.resize(width, height);
+        //vertex.resize(width, height);
         m_vertices.push_back(vertex);
     }
     if (words.at(0).compare("vt") == 0){
@@ -131,60 +130,6 @@ void Parser::project(const double distance_z)
         v.setY(vect.y);
         v.setZ(vect.z);
     }
-}
-
-void Parser::transform(){
-    for (Vertex &v : m_vertices){
-        
-    }
-
-}
-
-void Parser::generateModelview (Vecteur pov, Vecteur center, Vecteur haut){
-    Vecteur diff_pov_center= {pov.x - center.x, pov.y - center.y, pov.z - center.z};
-
-    Vecteur z = normalize(diff_pov_center);
-    Vecteur x = normalize(produitCroix(haut, z));
-    Vecteur y = normalize(produitCroix(z, x));
-
-    Matrix Minv, t, modelview; 
-    Minv = Matrix::identify(4);
-    t = Matrix::identify(4);
-
-
-    for (int i = 0; i < 3; i++){
-        Minv[0][i] = x[i];
-        Minv[1][i] = y[i];
-        Minv[2][i] = z[i];
-        t[0][3] = -center[i];
-    }
-
-    modelview = Minv * t;
-    m_modelview = modelview;
-
-}
-
-void Parser::generateViewport (int x, int y, int w, int h){
-    Matrix viewport = Matrix::identify(4);
-    viewport[0][3] = x+w/2.;
-    viewport[1][3] = y+h/2.;
-    viewport[2][3] = DEPTH/2.;
-
-    viewport[0][0] = w/2.;
-    viewport[1][1] = h/2.;
-    viewport[2][2] = DEPTH/2.;
-
-    m_viewport = viewport;
-}
-
-void Parser::generateProjection (Vecteur pov, Vecteur center){
-    Matrix proj = Matrix::identify(4);
-    Vecteur diff_pov_center= {pov.x - center.x, pov.y - center.y, pov.z - center.z};
-    double n = diff_pov_center.x * diff_pov_center.x + diff_pov_center.y * diff_pov_center.y + diff_pov_center.z * diff_pov_center.z;
-    n = sqrt(n);
-
-    proj[3][2] = -1. / n;
-    m_projection = proj;
 }
 
 

@@ -1,10 +1,18 @@
 #include "Vertex.h"
 
-Vertex::Vertex(const double x, const double y, const double z) : m_x{x}, m_y{y}, m_z{z}
+Vertex::Vertex(const double x, const double y, const double z) : m_x{x}, m_y{y}, m_z{z}, m_hasBeenTransformed{false}
 {
 }
 
 Vertex::~Vertex() {}
+
+Vecteur Vertex::toVecteur () const{
+    Vecteur res = {m_x, m_y, m_z};
+    return res;
+}
+
+Vertex::Vertex (Vecteur & v) : m_x{v.x}, m_y{v.y}, m_z{v.z}, m_hasBeenTransformed{false}{
+}
 
 void Vertex::resize(const int width, const int height)
 {
@@ -58,6 +66,13 @@ void Vertex::setZ(double z)
     m_z = z;
 }
 
+void Vertex::setTransformed(bool transformed){
+    m_hasBeenTransformed = transformed;
+}
+
+bool Vertex::hasBeenTransformed(){
+    return m_hasBeenTransformed;
+}
 
 void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const
 {
