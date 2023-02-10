@@ -91,7 +91,6 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(2));
         z = std::stod(words.at(3));
         Vertex vertex = Vertex(x, y, z);
-        //vertex.resize(width, height);
         m_vertices.push_back(vertex);
     }
     if (words.at(0).compare("vt") == 0){
@@ -106,7 +105,6 @@ void Parser::buildVertexes(std::vector<std::string> &words, const int width, con
         y = std::stod(words.at(3));
         z = std::stod(words.at(4));
         NormalVector normal = NormalVector(x, y, z);
-        //vertex.resize(width, height);
         m_normals.push_back(normal);
     }
 }

@@ -12,18 +12,18 @@ struct Vecteur {
     double y;
     double z;
     Vecteur static normalize(Vecteur & vecteur){
-    double n = sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
-    Vecteur v;
-    v.x = vecteur.x;
-    v.y = vecteur.y;
-    v.z = vecteur.z;
+        double n = sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
+        Vecteur v;
+        v.x = vecteur.x;
+        v.y = vecteur.y;
+        v.z = vecteur.z;
 
-    v.x *= (1/n);
-    v.y *= (1/n);
-    v.z *= (1/n);
+        v.x *= (1/n);
+        v.y *= (1/n);
+        v.z *= (1/n);
 
-    return v;
-};
+        return v;
+    };
 Vecteur static produitCroix (Vecteur& v1, Vecteur & v2){
     Vecteur v;
     v.x = v1.y*v2.z - v1.z*v2.y;
@@ -81,7 +81,7 @@ public:
 
 };
 
-class NormalVector : Vertex
+class NormalVector : public Vertex
 {
 private:
     /* data */

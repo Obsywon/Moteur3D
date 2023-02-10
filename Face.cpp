@@ -45,14 +45,21 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
                     z_buffer[indice] = baryo[3];
 
                     x_texture = baryo[0] * m_textures[0].getRoundX() +
-                                    baryo[1] * m_textures[1].getRoundX() +
-                                    baryo[2] * m_textures[2].getRoundX();
+                                baryo[1] * m_textures[1].getRoundX() +
+                                baryo[2] * m_textures[2].getRoundX();
                                     
                     y_texture = baryo[0] * m_textures[0].getRoundY() +
-                                    baryo[1] * m_textures[1].getRoundY() +
-                                    baryo[2] * m_textures[2].getRoundY();
+                                baryo[1] * m_textures[1].getRoundY() +
+                                baryo[2] * m_textures[2].getRoundY();
+
+                    intensity = baryo[0] * m_normals[0].getX() +
+                                baryo[1] * m_normals[1].getY() +
+                                baryo[2] * m_normals[2].getZ();
+
+                    
                     
                     color = texture.get(x_texture, y_texture);
+                    color = TGAColor(255, 255, 255, 255);
 
                     // Intensité lumineuse
                     if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a));
@@ -69,12 +76,14 @@ double Face::color_intensity(const Vecteur &light_source)
     Vecteur v01 = {
         m_vertices[1].getX() - m_vertices[0].getX(),
         m_vertices[1].getY() - m_vertices[0].getY(),
-        m_vertices[1].getZ() - m_vertices[0].getZ()};
+        m_vertices[1].getZ() - m_vertices[0].getZ()
+        };
 
     Vecteur v02 = {
         m_vertices[2].getX() - m_vertices[0].getX(),
         m_vertices[2].getY() - m_vertices[0].getY(),
-        m_vertices[2].getZ() - m_vertices[0].getZ()};
+        m_vertices[2].getZ() - m_vertices[0].getZ()
+        };
     Vecteur normal = {
         v01.y * v02.z - v01.z * v02.y,
         v01.z * v02.x - v01.x * v02.z,

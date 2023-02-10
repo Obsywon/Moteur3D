@@ -177,6 +177,54 @@ Matrix.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Matrix.cpp.s
 .PHONY : Matrix.cpp.s
 
+Model.o: Model.cpp.o
+.PHONY : Model.o
+
+# target to build an object file
+Model.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.o
+.PHONY : Model.cpp.o
+
+Model.i: Model.cpp.i
+.PHONY : Model.i
+
+# target to preprocess a source file
+Model.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.i
+.PHONY : Model.cpp.i
+
+Model.s: Model.cpp.s
+.PHONY : Model.s
+
+# target to generate assembly for a file
+Model.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.s
+.PHONY : Model.cpp.s
+
+NormalVector.o: NormalVector.cpp.o
+.PHONY : NormalVector.o
+
+# target to build an object file
+NormalVector.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o
+.PHONY : NormalVector.cpp.o
+
+NormalVector.i: NormalVector.cpp.i
+.PHONY : NormalVector.i
+
+# target to preprocess a source file
+NormalVector.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.i
+.PHONY : NormalVector.cpp.i
+
+NormalVector.s: NormalVector.cpp.s
+.PHONY : NormalVector.s
+
+# target to generate assembly for a file
+NormalVector.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.s
+.PHONY : NormalVector.cpp.s
+
 Parser.o: Parser.cpp.o
 .PHONY : Parser.o
 
@@ -312,6 +360,12 @@ help:
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"
+	@echo "... Model.o"
+	@echo "... Model.i"
+	@echo "... Model.s"
+	@echo "... NormalVector.o"
+	@echo "... NormalVector.i"
+	@echo "... NormalVector.s"
 	@echo "... Parser.o"
 	@echo "... Parser.i"
 	@echo "... Parser.s"

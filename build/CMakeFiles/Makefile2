@@ -81,12 +81,12 @@ clean: CMakeFiles/tinyraytracer.dir/clean
 CMakeFiles/tinyraytracer.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target tinyraytracer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10 "Built target tinyraytracer"
 .PHONY : CMakeFiles/tinyraytracer.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/tinyraytracer.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles 8
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/tinyraytracer.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles 0
 .PHONY : CMakeFiles/tinyraytracer.dir/rule

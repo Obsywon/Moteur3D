@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Face.cpp" "CMakeFiles/tinyraytracer.dir/Face.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Face.cpp.o.d"
   "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Matrix.cpp" "CMakeFiles/tinyraytracer.dir/Matrix.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Matrix.cpp.o.d"
+  "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp" "CMakeFiles/tinyraytracer.dir/Model.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Model.cpp.o.d"
+  "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/NormalVector.cpp" "CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o.d"
   "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp" "CMakeFiles/tinyraytracer.dir/Parser.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Parser.cpp.o.d"
   "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Texture.cpp" "CMakeFiles/tinyraytracer.dir/Texture.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Texture.cpp.o.d"
   "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Vertex.cpp" "CMakeFiles/tinyraytracer.dir/Vertex.cpp.o" "gcc" "CMakeFiles/tinyraytracer.dir/Vertex.cpp.o.d"

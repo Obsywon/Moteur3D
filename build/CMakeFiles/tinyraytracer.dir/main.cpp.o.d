@@ -190,4 +190,5 @@ CMakeFiles/tinyraytracer.dir/main.cpp.o: \
  /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Vertex.h \
  /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/tgaimage.h \
  /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Matrix.h \
- /usr/include/c++/11/cassert /usr/include/assert.h
+ /usr/include/c++/11/cassert /usr/include/assert.h \
+ /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.h

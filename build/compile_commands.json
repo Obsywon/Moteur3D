@@ -11,6 +11,16 @@
 },
 {
   "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Model.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
+  "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/NormalVector.cpp",
+  "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/NormalVector.cpp"
+},
+{
+  "directory": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build",
   "command": "/usr/bin/c++  -I/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer  -Wall -Wextra -pedantic -std=c++11 -O3 -fopenmp -g -o CMakeFiles/tinyraytracer.dir/Parser.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp",
   "file": "/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp"
 },
