@@ -21,7 +21,6 @@ private:
     std::vector<Vertex> m_vertices;
     std::vector<Texture> m_textures;
     std::vector<NormalVector> m_normals;
-    int m_fullArea;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
     std::array <int, 4> load_bounding_box() const;

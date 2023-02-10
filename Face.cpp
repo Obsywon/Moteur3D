@@ -3,7 +3,6 @@
 Face::Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures, std::vector<NormalVector> &normals)
  : m_vertices{vertices}, m_textures{textures}, m_normals{normals}
 {
-    m_fullArea = calculate_area(m_vertices[0], m_vertices[1], m_vertices[2]);
 }
 
 Face::~Face() {}
@@ -54,7 +53,6 @@ void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
                                     baryo[2] * m_textures[2].getRoundY();
                     
                     color = texture.get(x_texture, y_texture);
-                    color = TGAColor(255, 0, 0, 255);
 
                     // Intensité lumineuse
                     if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a));
@@ -142,14 +140,13 @@ std::array<int, 4> Face::load_bounding_box() const
 std::array<double, 4> Face::baryocentric_values(const int x, const int y) const
 {
     std::array<double, 4> values = {0};
-
-    int area1 = calculate_area(m_vertices[0], m_vertices[1], x, y);
-    int area2 = calculate_area(m_vertices[1], m_vertices[2], x, y);
-    int area3 = calculate_area(m_vertices[2], m_vertices[0], x, y);
-
-    double alpha = (double)area2 / (double)m_fullArea;
-    double beta = (double)area3 / (double)m_fullArea;
-    double gamma = (double)area1 / (double)m_fullArea;
+    double fullArea = calculate_area(m_vertices[0], m_vertices[1], m_vertices[2]);
+    double area1 = calculate_area(m_vertices[0], m_vertices[1], x, y);
+    double area2 = calculate_area(m_vertices[1], m_vertices[2], x, y);
+    double area3 = calculate_area(m_vertices[2], m_vertices[0], x, y);
+    double alpha = (double)area2 / (double)fullArea;
+    double beta = (double)area3 / (double)fullArea;
+    double gamma = (double)area1 / (double)fullArea;
 
     double baryo_z = alpha * m_vertices[0].getZ() +
                      beta * m_vertices[1].getZ() +
@@ -158,7 +155,6 @@ std::array<double, 4> Face::baryocentric_values(const int x, const int y) const
     values[1] = beta;
     values[2] = gamma;
     values[3] = baryo_z;
-
     return values;
 }
 

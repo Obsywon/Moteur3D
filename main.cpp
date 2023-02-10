@@ -36,7 +36,6 @@ int main(int argc, char** argv) {
     for (Face &face: faces){
         model.transform(face);
         face.draw_triangle(image, z_buffer, texture);
-        //face.draw_line_triangle(image, VERT);
     }
 
 	image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
