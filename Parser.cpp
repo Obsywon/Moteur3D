@@ -114,9 +114,10 @@ void Parser::project(const double distance_z)
     Vecteur vect;
     Matrix matrix, identity;
     identity = matrix.identify(4);
+    identity[3][2] = -1/distance_z;
+
 
     for (Vertex &v : m_vertices){
-        identity[3][2] = -1/distance_z;
         matrix = Matrix(4, 1);
         matrix[0][0] = v.getX();
         matrix[1][0] = v.getY();

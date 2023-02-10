@@ -1,7 +1,7 @@
 #include "Face.h"
 
 Face::Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures, std::vector<NormalVector> &normals)
- : m_vertices{vertices}, m_textures{textures}, m_normals{normals}
+    : m_vertices{vertices}, m_textures{textures}, m_normals{normals}
 {
 }
 
@@ -13,62 +13,19 @@ std::ostream &operator<<(std::ostream &s, const Face &face)
              << face.m_vertices.at(1) << ", " << face.m_vertices.at(2) << ") " << std::endl;
 }
 
-void Face::draw_triangle(TGAImage &img, double *z_buffer, TGAImage &texture)
+Vertex &Face::getVertex(const int indice)
 {
-    std::array<int, 4> box = load_bounding_box();
-    std::array<double, 4> baryo = {0};
-    Vecteur light_source = {0, 0, -1};
-    double intensity = color_intensity(light_source);
-    int indice, x_texture, y_texture;
-    TGAColor color;
-
-
-    // Remplir le rectangle
-    for (int x = box[0]; x <= box[2]; x++)
-    {
-        for (int y = box[1]; y <= box[3]; y++)
-        {
-
-            if (x < 0 || x > WIDTH || y < 0 || y > HEIGHT ) continue;
-
-            baryo = baryocentric_values(x, y);
-            indice = int(x + y * WIDTH);
-
-            if (baryo[0] > -0.0001 && baryo[1] > -0.0001 && baryo[2] > -0.0001)
-            {
-
-                if (z_buffer[indice] < baryo[3])
-                {
-
-
-                    // calcul z-index : pixel doit être rasterisé
-                    z_buffer[indice] = baryo[3];
-
-                    x_texture = baryo[0] * m_textures[0].getRoundX() +
-                                baryo[1] * m_textures[1].getRoundX() +
-                                baryo[2] * m_textures[2].getRoundX();
-                                    
-                    y_texture = baryo[0] * m_textures[0].getRoundY() +
-                                baryo[1] * m_textures[1].getRoundY() +
-                                baryo[2] * m_textures[2].getRoundY();
-
-                    intensity = baryo[0] * m_normals[0].getX() +
-                                baryo[1] * m_normals[1].getY() +
-                                baryo[2] * m_normals[2].getZ();
-
-                    
-                    
-                    color = texture.get(x_texture, y_texture);
-                    color = TGAColor(255, 255, 255, 255);
-
-                    // Intensité lumineuse
-                    if (intensity > 0) img.set(x, y, TGAColor(color.r * intensity, color.g * intensity, color.b * intensity, color.a));
-                
-                }
-            }
-        }
-    }
+    return m_vertices[indice];
 }
+
+NormalVector &Face::getNormal(const int indice)
+{
+    return m_normals[indice];
+}
+
+    void Face::setVertex(Vertex v, const int indice){
+        m_vertices[indice] = v;
+    }
 
 double Face::color_intensity(const Vecteur &light_source)
 {
@@ -76,14 +33,12 @@ double Face::color_intensity(const Vecteur &light_source)
     Vecteur v01 = {
         m_vertices[1].getX() - m_vertices[0].getX(),
         m_vertices[1].getY() - m_vertices[0].getY(),
-        m_vertices[1].getZ() - m_vertices[0].getZ()
-        };
+        m_vertices[1].getZ() - m_vertices[0].getZ()};
 
     Vecteur v02 = {
         m_vertices[2].getX() - m_vertices[0].getX(),
         m_vertices[2].getY() - m_vertices[0].getY(),
-        m_vertices[2].getZ() - m_vertices[0].getZ()
-        };
+        m_vertices[2].getZ() - m_vertices[0].getZ()};
     Vecteur normal = {
         v01.y * v02.z - v01.z * v02.y,
         v01.z * v02.x - v01.x * v02.z,
@@ -91,7 +46,8 @@ double Face::color_intensity(const Vecteur &light_source)
     };
 
     double longueur = std::sqrt((normal.x * normal.x) +
-                                (normal.y * normal.y) + (normal.z * normal.z));
+                                (normal.y * normal.y) +
+                                (normal.z * normal.z));
 
     normal.x /= longueur;
     normal.y /= longueur;
@@ -110,7 +66,6 @@ void Face::draw_line_triangle(TGAImage &img, TGAColor color) const
     v0.draw_line(v1, img, color);
     v0.draw_line(v2, img, color);
     v1.draw_line(v2, img, color);
-    
 }
 
 std::array<int, 4> Face::load_bounding_box() const
@@ -177,17 +132,55 @@ double Face::calculate_area(const Vertex &v1, const Vertex &v2, double x, double
     return (v1.getX() * (v2.getY() - y) + v2.getX() * (y - v1.getY()) + x * (v1.getY() - v2.getY())) / 2.;
 }
 
-void Face::transform(Matrix &viewport, Matrix &modelview, Matrix &projection){
+void Face::transform(Matrix &viewport, Matrix &modelview, Matrix &projection)
+{
     Vecteur vect;
-    Matrix temp;
-    for (Vertex& v : m_vertices){
-        if (v.hasBeenTransformed()) continue;
+    Matrix temp, normals;
+    Matrix m = viewport * modelview * projection;
+
+    for (Vertex &v : m_vertices)
+    {
+        if (v.hasBeenTransformed())
+            continue;
         temp = Matrix(v);
-        temp = viewport * modelview * projection * temp;
+        temp = m * temp;
         vect = temp.matrixToVector();
         v.setX(vect.x);
         v.setY(vect.y);
         v.setZ(vect.z);
         v.setTransformed(true);
     }
+
+    Matrix mT = m.transpose();
+
+    /* for (NormalVector& n : m_normals){
+        normals = Matrix(4, 1);
+        normals[0][0] = n.getX();
+        normals[1][0] = n.getY();
+        normals[2][0] = n.getZ();
+        normals[3][0] = 0.;
+
+        normals = mT.inverse() * normals;
+        normals = normals.transpose();
+        n.setX(normals[0][0]);
+        n.setY(normals[1][0]);
+        n.setZ(normals[2][0]);
+
+        std::cout << n << std::endl;
+    } */
+}
+
+TGAColor Face::getColor(TGAImage &texture, std::array<double, 4> baryo)
+{
+    int x = baryo[0] * m_textures[0].getRoundX() +
+            baryo[1] * m_textures[1].getRoundX() +
+            baryo[2] * m_textures[2].getRoundX();
+
+    int y = baryo[0] * m_textures[0].getRoundY() +
+            baryo[1] * m_textures[1].getRoundY() +
+            baryo[2] * m_textures[2].getRoundY();
+
+    // Récupération de la couleur du pixel sur la texture
+    TGAColor color = texture.get(x, y);
+    return color;
 }

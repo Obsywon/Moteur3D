@@ -6,6 +6,7 @@
 
 
 const int SIZE = 4;
+const int DEPTH{255};
 
 class Matrix
 {
@@ -29,6 +30,12 @@ public:
     Matrix inverse();
     Matrix transpose();
     Vecteur matrixToVector();
+
+    static Matrix generateModelview(Vecteur pov, Vecteur center, Vecteur haut);
+
+    static Matrix generateViewport(int x, int y, int w, int h);
+
+    static Matrix generateProjection(Vecteur pov, Vecteur center);
 
 };
 

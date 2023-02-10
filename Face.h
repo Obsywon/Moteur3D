@@ -8,9 +8,11 @@
 #include <random>
 #include "Texture.h"
 #include "Matrix.h"
+#include "tgaimage.h"
 
-constexpr int HEIGHT {1000};
-constexpr int WIDTH {1000};
+
+
+
 
 
 
@@ -23,12 +25,17 @@ private:
     std::vector<NormalVector> m_normals;
 
     friend std::ostream& operator <<(std::ostream &s, const Face& face);
-    std::array <int, 4> load_bounding_box() const;
+
 
 
 public:
     Face(std::vector<Vertex> &vertices, std::vector<Texture> &textures, std::vector<NormalVector> &normals);
     ~Face();
+
+    Vertex& getVertex(const int indice);
+    NormalVector& getNormal(const int indice);
+
+    void setVertex(Vertex v, const int indice);
 
     /**
      * Dessine les segments du triangle
@@ -36,13 +43,12 @@ public:
     void draw_line_triangle(TGAImage &img, TGAColor color) const;
 
     void project(const double distance_z);
+    std::array <int, 4> load_bounding_box() const;
 
 
     /**
      * Dessine un triangle rempli
     */
-    void draw_triangle(TGAImage &img, double* z_buffer, TGAImage &texture);
-
 
     double calculate_area (const Vertex &v1, const Vertex &v2, const Vertex &v3) const;
 
@@ -55,7 +61,16 @@ public:
 
     std::array<double, 4> baryocentric_values (const int x, const int y) const;
 
+
+    TGAColor getColor (TGAImage &texture, std::array<double, 4> baryo);
+
+
+    /**
+     * Réalise la transformation de l'objet 
+    */
     void transform(Matrix &viewport, Matrix &modelview, Matrix &projection);
+
 };
+
 
 #endif //__FACE_H__

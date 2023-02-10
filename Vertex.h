@@ -1,36 +1,51 @@
 #ifndef __VERTEX_H__
 #define __VERTEX_H__
 
-
 #include <iostream>
 #include <cmath>
 #include <vector>
 #include "tgaimage.h"
 
-struct Vecteur {
+struct Vecteur
+{
     double x;
     double y;
     double z;
-    Vecteur static normalize(Vecteur & vecteur){
+    Vecteur static normalize(Vecteur &vecteur)
+    {
         double n = sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
         Vecteur v;
         v.x = vecteur.x;
         v.y = vecteur.y;
         v.z = vecteur.z;
 
-        v.x *= (1/n);
-        v.y *= (1/n);
-        v.z *= (1/n);
+        v.x *= (1 / n);
+        v.y *= (1 / n);
+        v.z *= (1 / n);
 
         return v;
     };
-Vecteur static produitCroix (Vecteur& v1, Vecteur & v2){
-    Vecteur v;
-    v.x = v1.y*v2.z - v1.z*v2.y;
-    v.y = v1.z*v2.x - v1.x*v2.z;
-    v.z = v1.x*v2.y - v1.y*v2.x;
-    return v;
-}
+    Vecteur static produitCroix(Vecteur &v1, Vecteur &v2)
+    {
+        Vecteur v;
+        v.x = v1.y * v2.z - v1.z * v2.y;
+        v.y = v1.z * v2.x - v1.x * v2.z;
+        v.z = v1.x * v2.y - v1.y * v2.x;
+        return v;
+    }
+
+    double operator[](const int i){
+        int index = i%3;
+        switch (index){
+            case 0: return x;
+            case 1: return y;
+            case 2: return z;
+        };
+    }
+
+    int operator* (const Vecteur &v){
+        return x * v.x + y * v.y + v.z * z;
+    }
 
 };
 
@@ -42,17 +57,14 @@ protected:
     double m_z;
     bool m_hasBeenTransformed;
 
-    friend std::ostream& operator <<(std::ostream &s, const Vertex& vertex);
-    friend bool operator== (Vertex &s, Vertex &t);
-
-
+    friend std::ostream &operator<<(std::ostream &s, const Vertex &vertex);
+    friend bool operator==(Vertex &s, Vertex &t);
 
 public:
-    
     explicit Vertex(const double x, const double y, const double z);
-    Vertex (Vecteur & v);
+    Vertex(Vecteur &v);
 
-    Vecteur toVecteur () const;
+    Vecteur toVecteur() const;
 
     ~Vertex();
 
@@ -71,14 +83,11 @@ public:
     void setTransformed(bool transformed);
     bool hasBeenTransformed();
 
-
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;
 
-
-    void draw_line (const Vertex &end, TGAImage &img, TGAColor color) const;
+    void draw_line(const Vertex &end, TGAImage &img, TGAColor color) const;
 
     void resize(const int width, const int height);
-
 };
 
 class NormalVector : public Vertex
@@ -89,11 +98,5 @@ public:
     NormalVector(const double x, const double y, const double z);
     ~NormalVector();
 };
-
-
-
-
-
-
 
 #endif //__VERTEX_H__
