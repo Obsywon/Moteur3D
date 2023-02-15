@@ -16,7 +16,7 @@ Matrix projection = Matrix::generateProjection(camera, center);
 struct IShader
 {
     virtual void vertex(Vertex &v, int indice) = 0;
-    virtual bool fragment(Vecteur bar, TGAColor &color) = 0;
+    virtual bool fragment(TGAColor &normal, TGAColor &color) = 0;
 };
 
 struct GouraudShader : public IShader
@@ -29,22 +29,34 @@ struct GouraudShader : public IShader
         Vecteur temp = v.toVecteur();
         Matrix gl_Vertex = Matrix(temp);
         Vecteur prod = Vecteur::produitCroix(temp, light_dir);
-        varying_intensity[indice] = std::max(0.,Vecteur::norm(prod));
+        varying_intensity[indice ] = std::max(0., Vecteur::norm(prod));
         Matrix result = viewport * projection * modelview * gl_Vertex;
         Vecteur res = result.matrixToVector();
         v = Vertex(res);
     }
 
-    bool fragment(Vecteur norm, TGAColor &color) override
+    bool fragment(TGAColor &normal, TGAColor &color) override
     {
-        double diffuse = varying_intensity * norm;
-        std::cout << diffuse << std::endl;
-        color = TGAColor(color.r * diffuse, color.g * diffuse, color.b * diffuse, 255); // well duh
+        Vecteur norm, rgb;
+        norm.x = normal.r * 2. / 255. -1.;
+        norm.y = normal.g * 2. / 255. -1.;
+        norm.z = normal.b * 2. / 255. -1.;
+        norm = Vecteur::normalize(norm);
+
+        rgb.x = color.r;
+        rgb.y = color.g;
+        rgb.z = color.b;
+
+
+        double diffuse = std::max(0., rgb * norm) / 255;
+        color.r *= diffuse;
+        color.g *= diffuse;
+        color.b *= diffuse;
         return false;
     }
 };
 
-int main(int argc, char **argv)
+int main(/*int argc, char **argv*/)
 {
 
     double *z_buffer = new double[WIDTH * HEIGHT];
@@ -52,10 +64,14 @@ int main(int argc, char **argv)
         ;
 
     TGAImage texture = TGAImage();
-    texture.read_tga_file("./obj/african_head/african_head_diffuse.tga");
+    texture.read_tga_file("../obj/african_head/african_head_diffuse.tga");
     texture.flip_vertically();
 
-    Parser parser("./obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
+    TGAImage normal_map = TGAImage();
+    normal_map.read_tga_file("../obj/african_head/african_head_nm.tga");
+    normal_map.flip_vertically();
+
+    Parser parser("../obj/african_head/african_head.obj", WIDTH, HEIGHT, texture);
 
   
 
@@ -74,8 +90,7 @@ int main(int argc, char **argv)
 
         std::array<int, 4> box = face.load_bounding_box();
         std::array<double, 4> baryo;
-        Vecteur light_source = {0, 0, -1.};
-        double intensity = face.color_intensity(light_source);
+        double intensity = face.color_intensity(light_dir);
         TGAColor color;
 
         // Remplir le rectangle
@@ -100,18 +115,15 @@ int main(int argc, char **argv)
 
 
                     TGAColor color = face.getColor(texture, baryo);
-                    Vecteur norm;
-                    norm.x = color.r * 2. / 255. -1.;
-                    norm.y = color.g * 2. / 255. -1.;
-                    norm.z = color.b * 2. / 255. -1.;
-
-                    norm.x = baryo[0];
-                    norm.y = baryo[1];
-                    norm.z = baryo[2];
-
+                    TGAColor normal = face.getColor(normal_map, baryo);
                     
 
-                    bool discard = shader.fragment(norm, color);
+                    bool discard = shader.fragment(normal, color);
+
+                    /* color.r *= intensity;
+                    color.g *= intensity;
+                    color.b *= intensity; */
+
                     if (!discard)
                     {
                         image.set(x, y, color);
@@ -123,7 +135,7 @@ int main(int argc, char **argv)
     }
 
     image.flip_vertically(); // i want to have the origin at the left bottom corner of the image
-    image.write_tga_file("output.tga");
+    image.write_tga_file("../output.tga");
 
     return 0;
 }

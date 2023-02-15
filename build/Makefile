@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named tinyraytracer
+# Target rules for targets named renderer
 
 # Build rule for target.
-tinyraytracer: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tinyraytracer
-.PHONY : tinyraytracer
+renderer: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 renderer
+.PHONY : renderer
 
 # fast build rule for target.
-tinyraytracer/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/build
-.PHONY : tinyraytracer/fast
+renderer/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/build
+.PHONY : renderer/fast
 
 Face.o: Face.cpp.o
 .PHONY : Face.o
 
 # target to build an object file
 Face.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Face.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Face.cpp.o
 .PHONY : Face.cpp.o
 
 Face.i: Face.cpp.i
@@ -142,7 +142,7 @@ Face.i: Face.cpp.i
 
 # target to preprocess a source file
 Face.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Face.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Face.cpp.i
 .PHONY : Face.cpp.i
 
 Face.s: Face.cpp.s
@@ -150,7 +150,7 @@ Face.s: Face.cpp.s
 
 # target to generate assembly for a file
 Face.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Face.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Face.cpp.s
 .PHONY : Face.cpp.s
 
 Matrix.o: Matrix.cpp.o
@@ -158,7 +158,7 @@ Matrix.o: Matrix.cpp.o
 
 # target to build an object file
 Matrix.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Matrix.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Matrix.cpp.o
 .PHONY : Matrix.cpp.o
 
 Matrix.i: Matrix.cpp.i
@@ -166,7 +166,7 @@ Matrix.i: Matrix.cpp.i
 
 # target to preprocess a source file
 Matrix.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Matrix.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Matrix.cpp.i
 .PHONY : Matrix.cpp.i
 
 Matrix.s: Matrix.cpp.s
@@ -174,39 +174,15 @@ Matrix.s: Matrix.cpp.s
 
 # target to generate assembly for a file
 Matrix.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Matrix.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Matrix.cpp.s
 .PHONY : Matrix.cpp.s
-
-Model.o: Model.cpp.o
-.PHONY : Model.o
-
-# target to build an object file
-Model.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.o
-.PHONY : Model.cpp.o
-
-Model.i: Model.cpp.i
-.PHONY : Model.i
-
-# target to preprocess a source file
-Model.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.i
-.PHONY : Model.cpp.i
-
-Model.s: Model.cpp.s
-.PHONY : Model.s
-
-# target to generate assembly for a file
-Model.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Model.cpp.s
-.PHONY : Model.cpp.s
 
 NormalVector.o: NormalVector.cpp.o
 .PHONY : NormalVector.o
 
 # target to build an object file
 NormalVector.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/NormalVector.cpp.o
 .PHONY : NormalVector.cpp.o
 
 NormalVector.i: NormalVector.cpp.i
@@ -214,7 +190,7 @@ NormalVector.i: NormalVector.cpp.i
 
 # target to preprocess a source file
 NormalVector.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/NormalVector.cpp.i
 .PHONY : NormalVector.cpp.i
 
 NormalVector.s: NormalVector.cpp.s
@@ -222,7 +198,7 @@ NormalVector.s: NormalVector.cpp.s
 
 # target to generate assembly for a file
 NormalVector.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/NormalVector.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/NormalVector.cpp.s
 .PHONY : NormalVector.cpp.s
 
 Parser.o: Parser.cpp.o
@@ -230,7 +206,7 @@ Parser.o: Parser.cpp.o
 
 # target to build an object file
 Parser.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Parser.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Parser.cpp.o
 .PHONY : Parser.cpp.o
 
 Parser.i: Parser.cpp.i
@@ -238,7 +214,7 @@ Parser.i: Parser.cpp.i
 
 # target to preprocess a source file
 Parser.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Parser.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Parser.cpp.i
 .PHONY : Parser.cpp.i
 
 Parser.s: Parser.cpp.s
@@ -246,7 +222,7 @@ Parser.s: Parser.cpp.s
 
 # target to generate assembly for a file
 Parser.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Parser.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Parser.cpp.s
 .PHONY : Parser.cpp.s
 
 Texture.o: Texture.cpp.o
@@ -254,7 +230,7 @@ Texture.o: Texture.cpp.o
 
 # target to build an object file
 Texture.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Texture.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Texture.cpp.o
 .PHONY : Texture.cpp.o
 
 Texture.i: Texture.cpp.i
@@ -262,7 +238,7 @@ Texture.i: Texture.cpp.i
 
 # target to preprocess a source file
 Texture.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Texture.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Texture.cpp.i
 .PHONY : Texture.cpp.i
 
 Texture.s: Texture.cpp.s
@@ -270,7 +246,7 @@ Texture.s: Texture.cpp.s
 
 # target to generate assembly for a file
 Texture.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Texture.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Texture.cpp.s
 .PHONY : Texture.cpp.s
 
 Vertex.o: Vertex.cpp.o
@@ -278,7 +254,7 @@ Vertex.o: Vertex.cpp.o
 
 # target to build an object file
 Vertex.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Vertex.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Vertex.cpp.o
 .PHONY : Vertex.cpp.o
 
 Vertex.i: Vertex.cpp.i
@@ -286,7 +262,7 @@ Vertex.i: Vertex.cpp.i
 
 # target to preprocess a source file
 Vertex.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Vertex.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Vertex.cpp.i
 .PHONY : Vertex.cpp.i
 
 Vertex.s: Vertex.cpp.s
@@ -294,7 +270,7 @@ Vertex.s: Vertex.cpp.s
 
 # target to generate assembly for a file
 Vertex.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/Vertex.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/Vertex.cpp.s
 .PHONY : Vertex.cpp.s
 
 main.o: main.cpp.o
@@ -302,7 +278,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -310,7 +286,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -318,7 +294,7 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/main.cpp.s
 .PHONY : main.cpp.s
 
 tgaimage.o: tgaimage.cpp.o
@@ -326,7 +302,7 @@ tgaimage.o: tgaimage.cpp.o
 
 # target to build an object file
 tgaimage.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/tgaimage.cpp.o
 .PHONY : tgaimage.cpp.o
 
 tgaimage.i: tgaimage.cpp.i
@@ -334,7 +310,7 @@ tgaimage.i: tgaimage.cpp.i
 
 # target to preprocess a source file
 tgaimage.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/tgaimage.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/tgaimage.cpp.i
 .PHONY : tgaimage.cpp.i
 
 tgaimage.s: tgaimage.cpp.s
@@ -342,7 +318,7 @@ tgaimage.s: tgaimage.cpp.s
 
 # target to generate assembly for a file
 tgaimage.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/tinyraytracer.dir/build.make CMakeFiles/tinyraytracer.dir/tgaimage.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/renderer.dir/build.make CMakeFiles/renderer.dir/tgaimage.cpp.s
 .PHONY : tgaimage.cpp.s
 
 # Help Target
@@ -353,16 +329,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... tinyraytracer"
+	@echo "... renderer"
 	@echo "... Face.o"
 	@echo "... Face.i"
 	@echo "... Face.s"
 	@echo "... Matrix.o"
 	@echo "... Matrix.i"
 	@echo "... Matrix.s"
-	@echo "... Model.o"
-	@echo "... Model.i"
-	@echo "... Model.s"
 	@echo "... NormalVector.o"
 	@echo "... NormalVector.i"
 	@echo "... NormalVector.s"

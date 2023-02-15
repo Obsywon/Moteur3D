@@ -97,24 +97,10 @@ CMakeFiles/tinyraytracer.dir/Matrix.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tinyraytracer.dir/Matrix.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Matrix.cpp -o CMakeFiles/tinyraytracer.dir/Matrix.cpp.s
 
-CMakeFiles/tinyraytracer.dir/Model.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
-CMakeFiles/tinyraytracer.dir/Model.cpp.o: ../Model.cpp
-CMakeFiles/tinyraytracer.dir/Model.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tinyraytracer.dir/Model.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/Model.cpp.o -MF CMakeFiles/tinyraytracer.dir/Model.cpp.o.d -o CMakeFiles/tinyraytracer.dir/Model.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp
-
-CMakeFiles/tinyraytracer.dir/Model.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/tinyraytracer.dir/Model.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp > CMakeFiles/tinyraytracer.dir/Model.cpp.i
-
-CMakeFiles/tinyraytracer.dir/Model.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/tinyraytracer.dir/Model.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Model.cpp -o CMakeFiles/tinyraytracer.dir/Model.cpp.s
-
 CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o: ../NormalVector.cpp
 CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o -MF CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o.d -o CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/NormalVector.cpp
 
 CMakeFiles/tinyraytracer.dir/NormalVector.cpp.i: cmake_force
@@ -128,7 +114,7 @@ CMakeFiles/tinyraytracer.dir/NormalVector.cpp.s: cmake_force
 CMakeFiles/tinyraytracer.dir/Parser.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/Parser.cpp.o: ../Parser.cpp
 CMakeFiles/tinyraytracer.dir/Parser.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tinyraytracer.dir/Parser.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/tinyraytracer.dir/Parser.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/Parser.cpp.o -MF CMakeFiles/tinyraytracer.dir/Parser.cpp.o.d -o CMakeFiles/tinyraytracer.dir/Parser.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Parser.cpp
 
 CMakeFiles/tinyraytracer.dir/Parser.cpp.i: cmake_force
@@ -142,7 +128,7 @@ CMakeFiles/tinyraytracer.dir/Parser.cpp.s: cmake_force
 CMakeFiles/tinyraytracer.dir/Texture.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/Texture.cpp.o: ../Texture.cpp
 CMakeFiles/tinyraytracer.dir/Texture.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tinyraytracer.dir/Texture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/tinyraytracer.dir/Texture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/Texture.cpp.o -MF CMakeFiles/tinyraytracer.dir/Texture.cpp.o.d -o CMakeFiles/tinyraytracer.dir/Texture.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Texture.cpp
 
 CMakeFiles/tinyraytracer.dir/Texture.cpp.i: cmake_force
@@ -156,7 +142,7 @@ CMakeFiles/tinyraytracer.dir/Texture.cpp.s: cmake_force
 CMakeFiles/tinyraytracer.dir/Vertex.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/Vertex.cpp.o: ../Vertex.cpp
 CMakeFiles/tinyraytracer.dir/Vertex.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tinyraytracer.dir/Vertex.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/tinyraytracer.dir/Vertex.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/Vertex.cpp.o -MF CMakeFiles/tinyraytracer.dir/Vertex.cpp.o.d -o CMakeFiles/tinyraytracer.dir/Vertex.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/Vertex.cpp
 
 CMakeFiles/tinyraytracer.dir/Vertex.cpp.i: cmake_force
@@ -170,7 +156,7 @@ CMakeFiles/tinyraytracer.dir/Vertex.cpp.s: cmake_force
 CMakeFiles/tinyraytracer.dir/main.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/main.cpp.o: ../main.cpp
 CMakeFiles/tinyraytracer.dir/main.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tinyraytracer.dir/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/tinyraytracer.dir/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/main.cpp.o -MF CMakeFiles/tinyraytracer.dir/main.cpp.o.d -o CMakeFiles/tinyraytracer.dir/main.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/main.cpp
 
 CMakeFiles/tinyraytracer.dir/main.cpp.i: cmake_force
@@ -184,7 +170,7 @@ CMakeFiles/tinyraytracer.dir/main.cpp.s: cmake_force
 CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o: CMakeFiles/tinyraytracer.dir/flags.make
 CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o: ../tgaimage.cpp
 CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o: CMakeFiles/tinyraytracer.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o -MF CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o.d -o CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o -c /home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/tgaimage.cpp
 
 CMakeFiles/tinyraytracer.dir/tgaimage.cpp.i: cmake_force
@@ -199,7 +185,6 @@ CMakeFiles/tinyraytracer.dir/tgaimage.cpp.s: cmake_force
 tinyraytracer_OBJECTS = \
 "CMakeFiles/tinyraytracer.dir/Face.cpp.o" \
 "CMakeFiles/tinyraytracer.dir/Matrix.cpp.o" \
-"CMakeFiles/tinyraytracer.dir/Model.cpp.o" \
 "CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o" \
 "CMakeFiles/tinyraytracer.dir/Parser.cpp.o" \
 "CMakeFiles/tinyraytracer.dir/Texture.cpp.o" \
@@ -212,7 +197,6 @@ tinyraytracer_EXTERNAL_OBJECTS =
 
 tinyraytracer: CMakeFiles/tinyraytracer.dir/Face.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/Matrix.cpp.o
-tinyraytracer: CMakeFiles/tinyraytracer.dir/Model.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/NormalVector.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/Parser.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/Texture.cpp.o
@@ -221,7 +205,7 @@ tinyraytracer: CMakeFiles/tinyraytracer.dir/main.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/tgaimage.cpp.o
 tinyraytracer: CMakeFiles/tinyraytracer.dir/build.make
 tinyraytracer: CMakeFiles/tinyraytracer.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable tinyraytracer"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/guy/Documents/Semestre_8/Moteur_3D/project_renderer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable tinyraytracer"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tinyraytracer.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

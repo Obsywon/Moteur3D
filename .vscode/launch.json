@@ -8,7 +8,7 @@
             "name": "DbgTinyrenderer",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/main",
+            "program": "${workspaceFolder}/build/renderer",
             "args": [],
             "cwd": "${fileDirname}",
             "environment": [],

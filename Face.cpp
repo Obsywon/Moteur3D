@@ -45,9 +45,7 @@ double Face::color_intensity(const Vecteur &light_source)
         v01.x * v02.y - v01.y * v02.x,
     };
 
-    double longueur = std::sqrt((normal.x * normal.x) +
-                                (normal.y * normal.y) +
-                                (normal.z * normal.z));
+    double longueur = Vecteur::norm(normal);
 
     normal.x /= longueur;
     normal.y /= longueur;
