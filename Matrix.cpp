@@ -160,26 +160,29 @@ Matrix Matrix::generateModelview(Vecteur pov, Vecteur center, Vecteur haut)
     y = Vecteur::produitCroix(z, x);
     y = Vecteur::normalize(y);
 
-    Matrix Minv, t, modelview;
-    Minv = t.identify(4);
-    t = t.identify(4);
+    Matrix Minv = Minv.identify(4);
 
     Minv[0][0] = x.x;
     Minv[0][1] = x.y;
     Minv[0][2] = x.z;
+    Minv[0][3] = - center.x;
 
     Minv[1][0] = y.x;
     Minv[1][1] = y.y;
     Minv[1][2] = y.z;
+    Minv[1][3] = - center.y;
 
     Minv[2][0] = z.x;
     Minv[2][1] = z.y;
     Minv[2][2] = z.z;
+    Minv[2][3] = - center.z;
 
-    t[0][3] = -(center.x + center.y + center.z);
+    std::cout << z.x << " "<< z.y << " "<< z.z << std::endl;
 
-    modelview = Minv * t;
-    return modelview;
+
+
+
+    return Minv;
 }
 
 Matrix Matrix::generateViewport(int x, int y, int w, int h)

@@ -13,18 +13,20 @@ struct Vecteur
     double z;
     Vecteur static normalize(Vecteur &vecteur)
     {
-        double n = sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
+        double n = norm(vecteur);
         Vecteur v;
-        v.x = vecteur.x;
-        v.y = vecteur.y;
-        v.z = vecteur.z;
 
-        v.x *= (1 / n);
-        v.y *= (1 / n);
-        v.z *= (1 / n);
+        v.x = vecteur.x /n;
+        v.y = vecteur.y/n;
+        v.z = vecteur.z /n;
 
         return v;
     };
+
+    double static norm(Vecteur &vecteur){
+        return sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
+    }
+
     Vecteur static produitCroix(Vecteur &v1, Vecteur &v2)
     {
         Vecteur v;
@@ -34,16 +36,16 @@ struct Vecteur
         return v;
     }
 
-    double operator[](const int i){
+    double& operator[](const int i){
         int index = i%3;
         switch (index){
             case 0: return x;
             case 1: return y;
-            case 2: return z;
+            default: return z;
         };
     }
 
-    int operator* (const Vecteur &v){
+    double operator* (const Vecteur &v){
         return x * v.x + y * v.y + v.z * z;
     }
 
