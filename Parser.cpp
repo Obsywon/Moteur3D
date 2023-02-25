@@ -1,7 +1,7 @@
 #include "Parser.h"
 
 
-Parser::Parser(const std::string &path, const int width, const int height, TGAImage &texture):
+Parser::Parser(const std::string &path, TGAImage &texture):
 m_texture{texture}
 {
     // Initialisation des structures:
@@ -19,7 +19,7 @@ m_texture{texture}
                 continue;
             
             parseLine(current_line, words);
-            buildVertexes(words, width, height);
+            buildVertexes(words);
             buildFaces(words);
         }
 
@@ -76,7 +76,7 @@ std::array<int, 3> Parser::parsePartFace(std::string &word)
     return array;
 }
 
-void Parser::buildVertexes(std::vector<std::string> &words, const int width, const int height)
+void Parser::buildVertexes(std::vector<std::string> &words)
 {
     // Contient les vertices finales
     double x, y, z; 

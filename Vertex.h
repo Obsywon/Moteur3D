@@ -11,6 +11,13 @@ struct Vecteur
     double x;
     double y;
     double z;
+
+    /**
+     * @brief Normalisation d'un vecteur 3D
+     * 
+     * @param vecteur 
+     * @return Vecteur 
+     */
     Vecteur static normalize(Vecteur &vecteur)
     {
         double n = norm(vecteur);
@@ -23,6 +30,12 @@ struct Vecteur
         return v;
     };
 
+    /**
+     * @brief Calcul du facteur de normalisation d'un vecteur 3D
+     * 
+     * @param vecteur 
+     * @return double 
+     */
     double static norm(Vecteur &vecteur){
         return sqrt(vecteur.x * vecteur.x + vecteur.y * vecteur.y + vecteur.z * vecteur.z);
     }
@@ -85,8 +98,26 @@ public:
     void setTransformed(bool transformed);
     bool hasBeenTransformed();
 
+    /**
+     * @brief Rastérisation d'une ligne
+     * 
+     * @param x0 
+     * @param x1 
+     * @param y0 
+     * @param y1 
+     * @param img 
+     * @param color 
+     */
     void rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGAColor color) const;
 
+
+    /**
+     * @brief Dessin d'une ligne
+     * 
+     * @param end 
+     * @param img 
+     * @param color 
+     */
     void draw_line(const Vertex &end, TGAImage &img, TGAColor color) const;
 
     void resize(const int width, const int height);

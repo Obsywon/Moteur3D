@@ -29,15 +29,39 @@ private:
     std::uniform_int_distribution<int> m_distr; 
     std::default_random_engine m_engine;
 
-
+    /**
+     * @brief Parçage d'une ligne provenant d'un .obj en les découpant en sous mots
+     * 
+     * @param line Ligne traitée
+     * @param words Mots sorties
+     */
     void parseLine (const std::string &line, std::vector <std::string> &words);
+
+    /**
+     * @brief Traitement et récupération des entier d'une face
+     * 
+     * @param word Mot traité
+     * @return std::array <int,3> 
+     */
     std::array <int,3> parsePartFace (std::string &word);
-    void buildVertexes(std::vector <std::string> &words, const int width, const int height);
+
+    /**
+     * @brief Construction de chaque type d'éléments contenus dans le fichier .obj
+     * 
+     * @param words Mots à traiter - vers valeurs flottantes
+     */
+    void buildVertexes(std::vector <std::string> &words);
+
+    /**
+     * @brief Assemblage des vertexes dans une face
+     * 
+     * @param words mots à traiter
+     */
     void buildFaces (std::vector <std::string> &words);
     
 public:
     
-    Parser(const std::string& path, const int width, const int height, TGAImage& textured);
+    Parser(const std::string& path, TGAImage& textured);
     ~Parser();
     std::vector <Vertex> getVertexes ();
     std::vector <Face> getFaces ();

@@ -78,13 +78,13 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
 {
     bool steep = false;
     if (std::abs(x0 - x1) < std::abs(y0 - y1))
-    { // if the line is steep, we transpose the image
+    { 
         std::swap(x0, y0);
         std::swap(x1, y1);
         steep = true;
     }
     if (x0 > x1)
-    { // make it left−to−right
+    { 
         std::swap(x0, x1);
         std::swap(y0, y1);
     }
@@ -95,7 +95,7 @@ void Vertex::rasterize_line(int x0, int x1, int y0, int y1, TGAImage &img, TGACo
 
         if (steep)
         {
-            img.set(y, x, color); // if transposed, de−transpose
+            img.set(y, x, color); 
         }
         else
         {
